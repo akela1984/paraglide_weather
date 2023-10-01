@@ -1,0 +1,225 @@
+/* Move the navbar items to the right */
+.navbar-nav {
+  margin-left: auto;
+}
+
+/* Apply a modern glass effect */
+.navbar {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Glass background color with transparency */
+  backdrop-filter: blur(10px); /* Apply a blur effect to the background */
+  border-radius: 15px; /* Rounded corners for the navbar */
+}
+
+/* Style the navigation links */
+.navbar-nav .nav-link {
+  color: #fff; /* Text color */
+  margin: 0 10px; /* Add spacing between links */
+  transition: 0.3s; /* Smooth transition for hover effects */
+}
+
+/* Change link color on hover */
+.navbar-nav .nav-link:hover {
+  color: #39f; /* Hovered link color */
+}
+
+/* Style the brand/logo */
+.navbar-brand {
+  color: #fff; /* Brand/logo text color */
+  font-weight: bold; /* Bold font for the brand */
+  margin-right: 20px; /* Add spacing to separate from links */
+}
+
+/* Change brand/logo color on hover */
+.navbar-brand:hover {
+  color: #39f; /* Hovered brand/logo color */
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  background-color: #f7f7f7;
+}
+
+header {
+  text-align: center;
+  margin: 40px 0;
+}
+
+h1 {
+  font-size: 36px;
+  color: #333;
+}
+.weather-forcast {
+  margin: 20px;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+  background-color: #f2f2f2;
+}
+
+th,
+td {
+  padding: 16px;
+  text-align: center;
+}
+
+th {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  color: #999;
+}
+
+td {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+tr:nth-child(even) {
+  background-color: #fff;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+td:last-child {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+td:last-child:not(:empty) {
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+td:last-child:not(:empty):before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+td:last-child:contains("Flyable"):before {
+  background-color: #7bc96f;
+}
+
+td:last-child:contains("Not Flyable"):before {
+  background-color: #ff4d4d;
+}
+
+a {
+  color: #0077ff; /* Set link color to blue */
+  text-decoration: none; /* Remove default underline */
+  font-weight: bold; /* Set font weight to bold */
+  transition: all 0.3s ease-in-out; /* Add smooth hover transition */
+}
+a:hover {
+  color: #ffffff; /* Set link color to white on hover */
+  background-color: #0077ff; /* Add blue background on hover */
+  text-decoration: none; /* Remove underline on hover */
+}
+.main {
+  padding-top: 30px;
+}
+.border-top img,
+.blockquote img {
+  height: 45px;
+  padding-right: 10px;
+}
+
+.parking-instruction,
+.marker-icon-help-inner {
+  padding-top: 15px;
+}
+
+.parking-name {
+  padding-top: 20px;
+}
+
+/* CSS styles for the Fly Condition cell */
+.fly-condition {
+  color: white;
+  border: 1px solid white;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Flyable due to the rainy conditions */
+.fly-condition.rain {
+  background-color: red;
+}
+
+/* Ideal conditions for beginners and thermal flying */
+.fly-condition.ideal {
+  background-color: green;
+}
+
+/* Good conditions for most pilots */
+.fly-condition.good {
+  background-color: green;
+}
+
+/* Challenging conditions for intermediate pilots */
+.fly-condition.challenging {
+  background-color: orange;
+}
+
+/* Difficult conditions for experienced pilots only */
+.fly-condition.difficult {
+  background-color: red;
+}
+
+/* Dangerous conditions for all pilots */
+.fly-condition.dangerous {
+  background-color: red;
+}
+
+/* Extreme conditions, not suitable for flying */
+.fly-condition.extreme {
+  background-color: red;
+}
+
+/* Wind direction not suitable for this site */
+.fly-condition.unsuitable {
+  background-color: red;
+}
+
+/* adjust layout for smaller screens */
+@media (max-width: 576px) {
+  .col-auto {
+    margin-top: 1rem;
+  }
+  .marker-icon-help {
+    height: 2rem;
+    width: auto;
+    margin-right: 0.5rem;
+  }
+}
+
+/* adjust font sizes for smaller screens */
+@media (max-width: 768px) {
+  .col-auto {
+    font-size: 0.8rem;
+  }
+  .btn {
+    font-size: 0.8rem;
+  }
+}
