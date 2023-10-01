@@ -268,7 +268,7 @@
                     <td>{{ day['description'] }}</td>
                     <td>{{ day['windDirection'] }}</td>
                     <td>{{ day['windSpeed'] }} m/s</td>
-                    <td class="fly-condition {{ day['flyConditionClass'] }}">{{ day['flyCondition'] }}</td>
+                    <td class="fly-condition {{ day['flyConditionClass'] }}">{{ day['flyConditionTintoSouth'] }}</td>
                   </tr>
                 {% endfor %}
             </tbody>
@@ -282,6 +282,144 @@
         </div>
       </div>
       <!-- Tinto South Ends here-->
+<!-- Tinto North Starts here-->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="heading-2">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2">
+      <figure class="mb-0">
+        <blockquote class="blockquote">
+          <p><img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png" class="marker-icon-help" />Tinto North</p>
+        </blockquote>
+        <figcaption class="blockquote-footer mb-0">Location - NS 924 345 <br>&nbsp; &nbsp; &nbsp;Wind directions: North-East to North-West </figcaption>
+      </figure><br>
+      </figure>
+    </button>
+  </h2>
+  <div id="collapse-2" class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#placesAccordion">
+    <div class="accordion-body">
+      <div class="row row-cols-2 row-cols-sm-2 d-none">
+        <div class="col">
+          <i class="fas fa-arrow-up"></i> 91m
+          <br>
+          <i class="fas fa-arrow-down"></i> 91m
+          <br>
+          <i class="fas fa-arrows-alt-v"></i> 0m
+        </div>
+        <div class="col">
+          <canvas class="compass-canvas" style="width: 100%; height: 5em;" id="compass-2" data-yellows="[[0,360]]" data-greens="[[325,25],[145,205]]"></canvas>
+        </div>
+      </div>
+      <div class="row row-cols-1">
+        <div class="col row justify-content-between pe-0 border-top">
+          <div class="col col-6 col-sm-4 col-md-2">
+            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png" class="marker-icon-help-inner" /><strong class="parking-name">Lower Parking</strong>
+          </div>
+          <div class="col-sm parking-instruction">
+            <p>Small car park on the right about 500m up the track</p>
+          </div> <br>
+          <div class="col-auto">55.584132 N<br />-3.705594 E</div>
+          <div class="col-auto text-end pe-0">
+            <div class="directionsBtnCtnr m-1 m-sm-0 mt-2 row">
+              <div class="col-auto g-1">
+                <button type="button" class="btn btn-secondary" onclick="navigator.clipboard && navigator.clipboard.writeText('55.584132 N, -3.705594 E') && showCoordToast()" data-bs-toggle="tooltip" data-bs-original-title="Copy coordinates">
+                  <i class="fas fa-copy"></i>
+                </button>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=55.584132%2C-3.705594" target="_blank" class="btn btn-primary"><i class="fab fa-google"></i></a>
+                <a href="http://maps.apple.com/?daddr=55.584132,-3.705594" target="_blank" class="btn btn-primary"><i class="fab fa-apple"></i></a>
+                <a href="https://www.waze.com/en/live-map/directions?latlng=55.584132%2C-3.705594&navigate=yes" target="_blank" class="btn btn-primary"><i class="fab fa-waze"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col row justify-content-between pe-0 border-top">
+          <div class="col col-6 col-sm-4 col-md-2">
+            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png" class="marker-icon-help-inner" /><strong class="parking-name">Upper parking</strong>
+          </div>
+          <div class="col-sm parking-instruction">
+            <p>4 wheel drive vehicles can be driven up the new track as far as the wind monitor mast at owners risk.</p>
+          </div><br>
+          <div class="col-auto">55.591147 N<br />-3.700296 E</div>
+          <div class="col-auto text-end pe-0">
+            <div class="directionsBtnCtnr m-1 m-sm-0 mt-2 row">
+              <div class="col-auto g-1">
+                <button type="button" class="btn btn-secondary" onclick="navigator.clipboard && navigator.clipboard.writeText('55.591147 N, -3.700296 E') && showCoordToast()" data-bs-toggle="tooltip" data-bs-original-title="Copy coordinates">
+                  <i class="fas fa-copy"></i>
+                </button>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=55.589632%2C-3.705244" target="_blank" class="btn btn-primary"><i class="fab fa-google"></i></a>
+                <a href="http://maps.apple.com/?daddr=55.591147,-3.700296" target="_blank" class="btn btn-primary"><i class="fab fa-apple"></i></a>
+                <a href="https://www.waze.com/en/live-map/directions?latlng=55.589632%2C-3.705244&navigate=yes" target="_blank" class="btn btn-primary"><i class="fab fa-waze"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col row justify-content-between pe-0 border-top">
+          <div class="col col-6 col-sm-4 col-md-2">
+            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png" class="marker-icon-help-inner" /><strong class="parking-name">Quarry parking</strong>
+          </div>
+          <div class="col-sm parking-instruction">
+            <p>Car park in the quarry at the top of the track.</p>
+          </div><br>
+          <div class="col-auto">55.589658<br />-3.714509 E</div>
+          <div class="col-auto text-end pe-0">
+            <div class="directionsBtnCtnr m-1 m-sm-0 mt-2 row">
+              <div class="col-auto g-1">
+                <button type="button" class="btn btn-secondary" onclick="navigator.clipboard && navigator.clipboard.writeText('55.589658 N, -3.714509 E') && showCoordToast()" data-bs-toggle="tooltip" data-bs-original-title="Copy coordinates">
+                  <i class="fas fa-copy"></i>
+                </button>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=55.589658%2C-3.714509" target="_blank" class="btn btn-primary"><i class="fab fa-google"></i></a>
+                <a href="http://maps.apple.com/?daddr=55.589658,-3.714509" target="_blank" class="btn btn-primary"><i class="fab fa-apple"></i></a>
+                <a href="https://www.waze.com/en/live-map/directions?latlng=55.589658%2C-3.714509&navigate=yes" target="_blank" class="btn btn-primary"><i class="fab fa-waze"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row row-cols-1">
+        <div class="col">
+          <div id="map-place-2" class="placeMap mt-1" style="height: 30em" data-lat="55.591147" data-lon="-3.700296"
+            data-subplaces='[{"id":1,"name":"Lower parking","description":"-","lat":55.584132,"lon":-3.705594},{"id":2,"name":"Upper parking","description":"-","lat":55.589632,"lon":-3.705244}, {"id":2,"name":"Quarry parking","description":"-","lat":55.589658,"lon":-3.714509}]'>
+          </div>
+          <div class="container">
+            <br>
+            <h3 class="text-center">7-Day Weather Forecast</h3>
+            <p class="text-center">While we do our best to make sure the forecasts are as accurate as possible you should always assess the conditions when you arrive at launch and decide for yourself if it's safe for you to fly.</p>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                  <tr>
+                      <th>Day</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Temperature (°C)</th>
+                      <th>Description</th>
+                      <th>Wind Direction</th>
+                      <th>Wind Speed (m/s)</th>
+                      <th>Fly Condition</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for day in forecast %}
+                  <tr>
+                      <td>{{ day['dayOfWeek'] }}</td>
+                      <td>{{ day['date'] }}</td>
+                      <td>{{ day['time'] }}</td>
+                      <td>{{ day['temperature'] }} °C</td>
+                      <td>{{ day['description'] }}</td>
+                      <td>{{ day['windDirection'] }}</td>
+                      <td>{{ day['windSpeed'] }} m/s</td>
+                      <td class="fly-condition {{ day['flyConditionClass'] }}">{{ day['flyConditionTintoNorth'] }}</td>
+                    </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Tinto North Ends here-->
       <script src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 
