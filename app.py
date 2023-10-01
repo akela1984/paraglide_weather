@@ -34,10 +34,11 @@ def sites():
                 wind_speed = round(item['wind']['speed'], 1)
                 rain = 'rain' in item and item['rain']
                 
-                # Determine fly condition based on JavaScript conditions
+                # Determine fly conditions
                 fly_condition_tinto_south, fly_condition_class = get_fly_condition_tinto_south(wind_direction, description, wind_speed)
                 fly_condition_tinto_north, fly_condition_class = get_fly_condition_tinto_north(wind_direction, description, wind_speed)
-                fly_condition_abington, fly_condition_class = get_fly_condition_abington(wind_direction, description, wind_speed)
+                fly_condition_abington, fly_condition_class = get_fly_condition_abington_and_dungeval(wind_direction, description, wind_speed)
+                fly_condition_dungeval, fly_condition_class = get_fly_condition_abington_and_dungeval(wind_direction, description, wind_speed)
 
                 
                 forecast.append({
@@ -52,6 +53,7 @@ def sites():
                     'flyConditionTintoSouth': fly_condition_tinto_south,
                     'flyConditionTintoNorth': fly_condition_tinto_north,
                     'flyConditionAbington': fly_condition_abington,
+                    'flyConditionDungeval': fly_condition_dungeval,
 
                     'flyConditionClass': fly_condition_class  # Add fly condition CSS class
                 })
@@ -142,7 +144,7 @@ def get_fly_condition_tinto_north(wind_direction, description, wind_speed):
         return "The wind direction is not suitable for this site.", "unsuitable"
     
     # Helper function to determine fly condition for Abington
-def get_fly_condition_abington(wind_direction, description, wind_speed):
+def get_fly_condition_abington_and_dungeval(wind_direction, description, wind_speed):
     if (
         wind_direction in ["W", "WSW", "WNW", "SW", "NW"]
         and "rain" in description.lower()
