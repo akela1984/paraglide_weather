@@ -51,6 +51,7 @@ def sites():
                     'rain': rain,
                     'flyConditionTintoSouth': fly_condition_tinto_south,
                     'flyConditionTintoNorth': fly_condition_tinto_north,
+                    'flyConditionAbington': fly_condition_abington,
 
                     'flyConditionClass': fly_condition_class  # Add fly condition CSS class
                 })
