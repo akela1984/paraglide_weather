@@ -1,45 +1,7 @@
-/* Move the navbar items to the right */
-.navbar-nav {
-  margin-left: auto;
-}
-
-/* Apply a modern glass effect */
-.navbar {
-  background: rgba(
-    255,
-    255,
-    255,
-    0.2
-  ); /* Glass background color with transparency */
-  backdrop-filter: blur(10px); /* Apply a blur effect to the background */
-  border-radius: 15px; /* Rounded corners for the navbar */
-}
-
-/* Style the navigation links */
-.navbar-nav .nav-link {
-  color: #fff; /* Text color */
-  margin: 0 10px; /* Add spacing between links */
-  transition: 0.3s; /* Smooth transition for hover effects */
-}
-
-/* Change link color on hover */
-.navbar-nav .nav-link:hover {
-  color: #39f; /* Hovered link color */
-}
-
-/* Style the brand/logo */
 .navbar-brand {
-  color: #fff; /* Brand/logo text color */
-  font-weight: bold; /* Bold font for the brand */
-  margin-right: 20px; /* Add spacing to separate from links */
-}
-
-/* Change brand/logo color on hover */
-.navbar-brand:hover {
-  color: #39f; /* Hovered brand/logo color */
-}
-
-body {
+  margin-left: 1rem;
+ 
+}body {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   background-color: #f7f7f7;
@@ -132,7 +94,7 @@ a {
 }
 a:hover {
   color: #ffffff; /* Set link color to white on hover */
-  background-color: #0077ff; /* Add blue background on hover */
+  /*background-color: #0077ff; Add blue background on hover */
   text-decoration: none; /* Remove underline on hover */
 }
 .main {
