@@ -37,6 +37,7 @@ def sites():
                 # Determine fly condition based on JavaScript conditions
                 fly_condition_tinto_south, fly_condition_class = get_fly_condition_tinto_south(wind_direction, description, wind_speed)
                 fly_condition_tinto_north, fly_condition_class = get_fly_condition_tinto_north(wind_direction, description, wind_speed)
+                fly_condition_abington, fly_condition_class = get_fly_condition_abington(wind_direction, description, wind_speed)
 
                 
                 forecast.append({
@@ -64,7 +65,7 @@ def get_wind_direction(degree):
     directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
     return directions[round((degree % 360) / 22.5)]
 
-# Helper function to determine fly condition based on JavaScript conditions
+# Helper function to determine fly condition for Tinto South
 def get_fly_condition_tinto_south(wind_direction, description, wind_speed):
     if (
         wind_direction in ["S", "SSW", "SSE", "SW", "SE"]
@@ -102,7 +103,7 @@ def get_fly_condition_tinto_south(wind_direction, description, wind_speed):
         return "The wind direction is not suitable for this site.", "unsuitable"
     
 
-# Helper function to determine fly condition based on JavaScript conditions
+# Helper function to determine fly condition for Tinto North
 def get_fly_condition_tinto_north(wind_direction, description, wind_speed):
     if (
         wind_direction in ["N", "NNW", "NNE", "NW", "NE"]
@@ -135,6 +136,43 @@ def get_fly_condition_tinto_north(wind_direction, description, wind_speed):
     ):
         return "Dangerous conditions for all pilots", "dangerous"
     elif wind_direction in ["N", "NNW", "NNE", "NW", "NE"] and wind_speed > 15:
+        return "Extreme conditions, not suitable for flying", "extreme"
+    else:
+        return "The wind direction is not suitable for this site.", "unsuitable"
+    
+    # Helper function to determine fly condition for Abington
+def get_fly_condition_abington(wind_direction, description, wind_speed):
+    if (
+        wind_direction in ["W", "WSW", "WNW", "Sw", "Nw"]
+        and "rain" in description.lower()
+    ):
+        return "Not flyable due to the rainy conditions.", "rain"
+    elif (
+        wind_direction in ["W", "WSW", "WNW", "Sw", "Nw"]
+        and 0 <= wind_speed <= 3
+    ):
+        return "Ideal conditions for beginners and thermal flying", "ideal"
+    elif (
+        wind_direction in ["W", "WSW", "WNW", "Sw", "Nw"]
+        and 3 < wind_speed <= 5
+    ):
+        return "Good conditions for most pilots", "good"
+    elif (
+        wind_direction in ["W", "WSW", "WNW", "Sw", "Nw"]
+        and 5 < wind_speed <= 8
+    ):
+        return "Challenging conditions for intermediate pilots", "challenging"
+    elif (
+        wind_direction in ["W", "WSW", "WNW", "Sw", "Nw"]
+        and 8 < wind_speed <= 11
+    ):
+        return "Difficult conditions for experienced pilots only", "difficult"
+    elif (
+        wind_direction in ["W", "WSW", "WNW", "Sw", "Nw"]
+        and 11 < wind_speed <= 15
+    ):
+        return "Dangerous conditions for all pilots", "dangerous"
+    elif wind_direction in ["W", "WSW", "WNW", "Sw", "Nw"] and wind_speed > 15:
         return "Extreme conditions, not suitable for flying", "extreme"
     else:
         return "The wind direction is not suitable for this site.", "unsuitable"
