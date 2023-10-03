@@ -4,6 +4,8 @@ import requests
 
 app = Flask(__name__)
 
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -15,6 +17,7 @@ def sites():
     response = requests.get(api_url)
     if response.status_code == 200:
         data = response.json()
+        
         
         # Process the data and create the forecast
         forecast_data = data['list'][:4 * 8]
@@ -30,16 +33,123 @@ def sites():
                 date_str = datetime.utcfromtimestamp(date).strftime('%d/%m/%Y')
                 temperature = round(item['main']['temp'])
                 description = item['weather'][0]['description'].capitalize()
+  
                 wind_direction = get_wind_direction(item['wind']['deg'])
                 wind_speed = round(item['wind']['speed'], 1)
                 rain = 'rain' in item and item['rain']
                 
                 # Determine fly conditions
-                fly_condition_tinto_south, fly_condition_class = get_fly_condition_tinto_south(wind_direction, description, wind_speed)
-                fly_condition_tinto_north, fly_condition_class = get_fly_condition_tinto_north(wind_direction, description, wind_speed)
-                fly_condition_abington, fly_condition_class = get_fly_condition_abington_and_dungeval(wind_direction, description, wind_speed)
-                fly_condition_dungeval, fly_condition_class = get_fly_condition_abington_and_dungeval(wind_direction, description, wind_speed)
+                fly_condition_tinto_south, fly_condition_class_tinto_south = get_fly_condition_tinto_south(wind_direction, description, wind_speed)
+                fly_condition_tinto_north, fly_condition_class_tinto_north = get_fly_condition_tinto_north(wind_direction, description, wind_speed)
+                fly_condition_abington, fly_condition_class_abington = get_fly_condition_abington_and_dungeval(wind_direction, description, wind_speed)
+                fly_condition_dungeval, fly_condition_class_dungeval = get_fly_condition_abington_and_dungeval(wind_direction, description, wind_speed)
+           
+                descriptionIcon = ''
 
+                if 'clear sky' in description.lower():
+                    descriptionIcon = 'fa-sun'  # Icon for clear sky
+                elif 'few clouds' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for few clouds
+                elif 'scattered clouds' in description.lower():
+                    descriptionIcon = 'fa-cloud'  # Icon for scattered clouds
+                elif 'broken clouds' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for broken clouds
+                elif 'overcast clouds' in description.lower():
+                    descriptionIcon = 'fa-cloud'  # Icon for overcast clouds
+                elif 'mist' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for mist
+                elif 'fog' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for fog
+                elif 'haze' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for haze
+                elif 'smoke' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for smoke
+                elif 'dust' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for dust
+                elif 'sand' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for sand
+                elif 'dust and sand' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for dust and sand
+                elif 'dust and fog' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for dust and fog
+                elif 'dust and mist' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for dust and mist
+                elif 'dust and haze' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for dust and haze
+                elif 'dust and smoke' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for dust and smoke
+                elif 'foggy' in description.lower():
+                    descriptionIcon = 'fa-cloud-sun'  # Icon for foggy
+                elif 'light rain' in description.lower():
+                    descriptionIcon = 'fa-cloud-rain'  # Icon for light rain
+                elif 'moderate rain' in description.lower():
+                    descriptionIcon = 'fa-cloud-showers-heavy'  # Icon for moderate rain
+                elif 'heavy rain' in description.lower():
+                    descriptionIcon = 'fa-cloud-showers-heavy'  # Icon for heavy rain
+                elif 'light snow' in description.lower():
+                    descriptionIcon = 'fa-snowflake'  # Icon for light snow
+                elif 'moderate snow' in description.lower():
+                    descriptionIcon = 'fa-snowflake'  # Icon for moderate snow
+                elif 'heavy snow' in description.lower():
+                    descriptionIcon = 'fa-snowflake'  # Icon for heavy snow
+                elif 'light drizzle' in description.lower():
+                    descriptionIcon = 'fa-cloud-rain'  # Icon for light drizzle
+                elif 'drizzle' in description.lower():
+                    descriptionIcon = 'fa-cloud-showers-heavy'  # Icon for drizzle
+                elif 'heavy drizzle' in description.lower():
+                    descriptionIcon = 'fa-cloud-showers-heavy'  # Icon for heavy drizzle
+                elif 'light rain showers' in description.lower():
+                    descriptionIcon = 'fa-cloud-rain'  # Icon for light rain showers
+                elif 'rain showers' in description.lower():
+                    descriptionIcon = 'fa-cloud-showers-heavy'  # Icon for rain showers
+                elif 'heavy rain showers' in description.lower():
+                    descriptionIcon = 'fa-cloud-showers-heavy'  # Icon for heavy rain showers
+                elif 'light snow showers' in description.lower():
+                    descriptionIcon = 'fa-snowflake'  # Icon for light snow showers
+                elif 'snow showers' in description.lower():
+                    descriptionIcon = 'fa-snowflake'  # Icon for snow showers
+                elif 'heavy snow showers' in description.lower():
+                    descriptionIcon = 'fa-snowflake'  # Icon for heavy snow showers
+                elif 'light thunderstorm' in description.lower():
+                    descriptionIcon = 'fa-bolt'  # Icon for light thunderstorm
+                elif 'thunderstorm' in description.lower():
+                    descriptionIcon = 'fa-bolt'  # Icon for thunderstorm
+                elif 'heavy thunderstorm' in description.lower():
+                    descriptionIcon = 'fa-bolt'  # Icon for heavy thunderstorm
+                elif 'thunderstorm with light rain' in description.lower():
+                    descriptionIcon = 'fa-bolt'  # Icon for thunderstorm with light rain
+                elif 'thunderstorm with rain' in description.lower():
+                    descriptionIcon = 'fa-bolt'  # Icon for thunderstorm with rain
+                elif 'thunderstorm with heavy rain' in description.lower():
+                    descriptionIcon = 'fa-bolt'  # Icon for thunderstorm with heavy rain
+                elif 'thunderstorm with light snow' in description.lower():
+                    descriptionIcon = 'fa-bolt'  # Icon for thunderstorm with light snow
+                elif 'thunderstorm with snow' in description.lower():
+                    descriptionIcon = 'fa-bolt'  # Icon for thunderstorm with snow
+                elif 'thunderstorm with heavy snow' in description.lower():
+                    descriptionIcon = 'fa-bolt'  # Icon for thunderstorm with heavy snow
+                elif 'sleet' in description.lower():
+                    descriptionIcon = 'fa-cloud-rain'  # Icon for sleet
+                elif 'freezing rain' in description.lower():
+                    descriptionIcon = 'fa-cloud-rain'  # Icon for freezing rain
+                elif 'freezing drizzle' in description.lower():
+                    descriptionIcon = 'fa-cloud-rain'  # Icon for freezing drizzle
+                elif 'tornado' in description.lower():
+                    descriptionIcon = 'fa-tornado'  # Icon for tornado
+                elif 'tropical storm' in description.lower():
+                    descriptionIcon = 'fa-wind'  # Icon for tropical storm
+                elif 'hurricane' in description.lower():
+                    descriptionIcon = 'fa-wind'  # Icon for hurricane
+                elif 'cold' in description.lower():
+                    descriptionIcon = 'fa-thermometer-empty'  # Icon for cold
+                elif 'hot' in description.lower():
+                    descriptionIcon = 'fa-thermometer-full'  # Icon for hot
+                elif 'windy' in description.lower():
+                    descriptionIcon = 'fa-wind'  # Icon for windy
+
+                # Add more "else if" conditions for other cases here
+                else:
+                    descriptionIcon = 'fa-sun'  # Default icon for other weather conditions (replace with your choice)
                 
                 forecast.append({
                     'dayOfWeek': day_of_week,
@@ -54,8 +164,14 @@ def sites():
                     'flyConditionTintoNorth': fly_condition_tinto_north,
                     'flyConditionAbington': fly_condition_abington,
                     'flyConditionDungeval': fly_condition_dungeval,
-
-                    'flyConditionClass': fly_condition_class  # Add fly condition CSS class
+                     # Add fly condition CSS class
+                    'flyConditionClassTintoNorth': fly_condition_class_tinto_north,  
+                    'flyConditionClassTintoSouth': fly_condition_class_tinto_south,  
+                    'flyConditionClassAbington' : fly_condition_class_abington,
+                    'flyConditionClassDungeval' : fly_condition_class_dungeval,
+                    'descriptionIcon': descriptionIcon 
+                    
+                    
                 })
 
         # Render the HTML template with the forecast data

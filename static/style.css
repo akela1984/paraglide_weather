@@ -116,7 +116,7 @@ a:hover {
 }
 
 /* CSS styles for the Fly Condition cell */
-.fly-condition {
+.fly-condition-tinto-south, .fly-condition-tinto-north, .fly-condition-abington, .fly-condition-dungeval  {
   color: white;
   border: 1px solid white;
   padding: 5px;
@@ -125,42 +125,42 @@ a:hover {
 }
 
 /* Flyable due to the rainy conditions */
-.fly-condition.rain {
+.fly-condition-tinto-south.rain, .fly-condition-tinto-north.rain, .fly-condition-abington.rain, .fly-condition-dungeval.rain {
   background-color: red;
 }
 
 /* Ideal conditions for beginners and thermal flying */
-.fly-condition.ideal {
+.fly-condition-tinto-south.ideal, .fly-condition-tinto-north.ideal, .fly-condition-abington.ideal, .fly-condition-dungeval.ideal {
   background-color: green;
 }
 
 /* Good conditions for most pilots */
-.fly-condition.good {
+.fly-condition-tinto-south.good, .fly-condition-tinto-north.good, .fly-condition-abington.good, .fly-condition-dungeval.good {
   background-color: green;
 }
 
 /* Challenging conditions for intermediate pilots */
-.fly-condition.challenging {
+.fly-condition-tinto-south.challenging, .fly-condition-tinto-north.challenging, .fly-condition-abington.challenging, .fly-condition-dungeval.challenging {
   background-color: orange;
 }
 
 /* Difficult conditions for experienced pilots only */
-.fly-condition.difficult {
+.fly-condition-tinto-south.difficult, .fly-condition-tinto-north.difficult, .fly-condition-abington.difficult, .fly-condition-dungeval.difficult {
   background-color: red;
 }
 
 /* Dangerous conditions for all pilots */
-.fly-condition.dangerous {
+.fly-condition-tinto-south.dangerous, .fly-condition-tinto-north.dangerous, .fly-condition-abington.dangerous, .fly-condition-dungeval.dangerous {
   background-color: red;
 }
 
 /* Extreme conditions, not suitable for flying */
-.fly-condition.extreme {
+.fly-condition-tinto-south.extreme, .fly-condition-tinto-north.extreme, .fly-condition-abington.extreme, .fly-condition-dungeval.extreme {
   background-color: red;
 }
 
 /* Wind direction not suitable for this site */
-.fly-condition.unsuitable {
+.fly-condition-tinto-south.unsuitable, .fly-condition-tinto-north.unsuitable, .fly-condition-abington.unsuitable, .fly-condition-dungeval.unsuitable {
   background-color: red;
 }
 
@@ -185,3 +185,5 @@ a:hover {
     font-size: 0.8rem;
   }
 }
+
+
