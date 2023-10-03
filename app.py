@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify # Import the flask module
 from datetime import datetime  # Import the datetime module
 import requests
 
@@ -27,7 +27,7 @@ def sites():
             date = item['dt']
             time_str = datetime.utcfromtimestamp(date).strftime('%H:%M')
             
-            # Check if the time is between 09:00 and 21:00
+            # Check if the time is between 09:00 and 21:00 - rest of the day is irrelevant for this sport as it can fly in dark
             if '09:00' <= time_str <= '21:00':
                 day_of_week = datetime.utcfromtimestamp(date).strftime('%a')
                 date_str = datetime.utcfromtimestamp(date).strftime('%d/%m/%Y')
@@ -38,7 +38,7 @@ def sites():
                 wind_speed = round(item['wind']['speed'], 1)
                 rain = 'rain' in item and item['rain']
                 
-                # Determine fly conditions
+                # Determine fly conditions for each site
                 fly_condition_tinto_south, fly_condition_class_tinto_south = get_fly_condition_tinto_south(wind_direction, description, wind_speed)
                 fly_condition_tinto_north, fly_condition_class_tinto_north = get_fly_condition_tinto_north(wind_direction, description, wind_speed)
                 fly_condition_abington, fly_condition_class_abington = get_fly_condition_abington_and_dungeval(wind_direction, description, wind_speed)
@@ -146,8 +146,6 @@ def sites():
                     descriptionIcon = 'fa-thermometer-full'  # Icon for hot
                 elif 'windy' in description.lower():
                     descriptionIcon = 'fa-wind'  # Icon for windy
-
-                # Add more "else if" conditions for other cases here
                 else:
                     descriptionIcon = 'fa-sun'  # Default icon for other weather conditions (replace with your choice)
                 
@@ -164,6 +162,7 @@ def sites():
                     'flyConditionTintoNorth': fly_condition_tinto_north,
                     'flyConditionAbington': fly_condition_abington,
                     'flyConditionDungeval': fly_condition_dungeval,
+                    
                      # Add fly condition CSS class
                     'flyConditionClassTintoNorth': fly_condition_class_tinto_north,  
                     'flyConditionClassTintoSouth': fly_condition_class_tinto_south,  
