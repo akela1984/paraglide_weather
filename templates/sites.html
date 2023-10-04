@@ -56,6 +56,19 @@
                <li class="nav-item">
                   <a class="nav-link" href="{{ url_for('sites') }}">Local Sites <span class="sr-only">(current)</span></a>
                </li>
+               {% if 'username' not in session %}
+               <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('login') }}">Login/Register <span class="sr-only">(current)</span></a>
+               </li>
+               {% endif %}
+              {% if 'username' in session %}
+              <li class="nav-item">
+               <a class="nav-link" href="{{ url_for('myaccount') }}">My Account <span class="sr-only">(current)</span></a>
+           </li>
+              <li class="nav-item">
+               <a class="nav-link" href="{{ url_for('logout') }}">Logout <span class="sr-only">(current)</span></a>
+           </li>
+           {% endif %}
             </ul>
          </div>
       </nav>
@@ -67,6 +80,14 @@
          </h3>
          <iframe frameborder="0" marginheight="1" marginwidth="1" scrolling="no" src="https://widget.holfuy.com/?station=950&su=km/h&t=C&lang=en&mode=average&avgrows=32" style="width:100%; height:170px;"></iframe>
      </div>
+     {% if 'username' not in session %}
+            <div class="forecast-info-container d-flex flex-column justify-content-center align-items-center">
+                <h3>Log in to see the 7-day forecast for all local sites of the club:</h3>
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+            </div>
+        {% endif %}
+     {% if 'username' in session %}
+      <div id="site-info">
       <div class="container-xl main">
       <div class="accordion" id="placesAccordion">
       <!-- Abington Service station Starts here-->
@@ -611,6 +632,8 @@
             </div>
          </div>
       </div>
+   </div>
+   {% endif %}
       <!-- Dungeval Ends here-->
       <script src="{{ url_for('static', filename='script.js') }}"></script>
    </body>

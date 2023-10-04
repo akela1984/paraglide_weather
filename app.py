@@ -1,14 +1,105 @@
-from flask import Flask, render_template, jsonify # Import the flask module
-from datetime import datetime  # Import the datetime module
+from flask import Flask, render_template, request, session, redirect, url_for, flash
+from datetime import datetime
 import requests
+import sqlite3
+import bcrypt
 
 app = Flask(__name__)
-
-
+app.secret_key = '5d2a1f0f7bba42f6a5476c1e1a683376' 
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        license_type = request.form['license_type']
+
+        # Hash the password
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+        # Insert user data into the database
+        try:
+            conn = sqlite3.connect('mydatabase.db')
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO users (username, password, email, license_type) VALUES (?, ?, ?, ?)",
+                           (username, hashed_password.decode('utf-8'), email, license_type))
+            conn.commit()
+            conn.close()
+            flash('Registration successful', 'success')
+            return redirect(url_for('login'))
+        except sqlite3.Error as e:
+            flash('Registration failed. Please try again.', 'danger')
+            return redirect(url_for('register'))
+
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['login-username']
+        password = request.form['login-password']
+        
+        # Check if the provided username exists in the database
+        conn = sqlite3.connect('mydatabase.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT username, password FROM users WHERE username=?", (username,))
+        user_data = cursor.fetchone()
+        conn.close()
+        
+        if user_data is not None:
+            db_username, hashed_password = user_data
+            # Verify the hashed password against the provided password
+            if bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8')):
+                session['username'] = username  # Set the username in the session
+
+                # Flash a success message
+                flash('Login successful!', 'success')
+                return redirect(url_for('index'))  # Redirect to the index page after successful login
+        
+        # If the username or password is invalid, show an error message
+        flash('Invalid credentials. Please try again', 'danger')
+        
+    return render_template('login.html')
+
+@app.route('/myaccount')
+def myaccount():
+    if 'username' in session:
+        username = session['username']
+
+        # Retrieve the user's details from the database
+        try:
+            conn = sqlite3.connect('mydatabase.db')
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
+            user_data = cursor.fetchone()
+            conn.close()
+
+            if user_data:
+                # user_data contains (id, username, password, email, license_type)
+                user_id, username, _, email, license_type = user_data
+                return render_template('myaccount.html', username=username, email=email, license_type=license_type)
+            else:
+                flash('User not found in the database.', 'danger')
+                return redirect(url_for('index'))
+        except sqlite3.Error as e:
+            flash('An error occurred while fetching user data.', 'danger')
+            return redirect(url_for('index'))
+    else:
+        flash('You must be logged in to access this page.', 'danger')
+        return redirect(url_for('login'))
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)  # Remove the username from the session
+    # Flash a success message
+    flash('You have successfully logged out', 'success')
+    return redirect(url_for('index'))  # Redirect to the index page after logout
+
 
 @app.route('/sites')
 def sites():
@@ -17,11 +108,11 @@ def sites():
     response = requests.get(api_url)
     if response.status_code == 200:
         data = response.json()
-        
-        
+
         # Process the data and create the forecast
         forecast_data = data['list'][:4 * 8]
         forecast = []
+
         
         for item in forecast_data:
             date = item['dt']
