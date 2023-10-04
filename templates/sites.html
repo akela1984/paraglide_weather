@@ -43,37 +43,48 @@
       <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
    </head>
    <div class="container-xl main">
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-secondary">
-         <a class="navbar-brand" href="{{ url_for('index') }}">LLSClub</a>
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-               <li class="nav-item active">
-                  <a class="nav-link" href="{{ url_for('index') }}">Home </a>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0">
+         <a class="navbar-brand bg-primary px-4 py-3" href="{{ url_for('index') }}">
+            L L S C
+         </a>
+      
+         <button class="navbar-toggler px-4 py-3 border-0" type="button"
+                 data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+         >+</button>
+      
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav border-top border-lg-0">
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('index') }}">Home </a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('sites') }}">Local Sites <span class="sr-only">(current)</span></a>
+                  <a class="nav-link px-4 px-lg-2 py-3 active" aria-current="page" href="{{ url_for('sites') }}">Local Sites</a>
                </li>
-               {% if 'username' not in session %}
+            </ul>
+      
+            <ul class="navbar-nav ms-auto me-0 me-lg-3 border-top border-lg-0">
+             {% if 'username' not in session %}
+           <li class="nav-item">
+             <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+             <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('register') }}">Register</a>
+          </li>
+           {% endif %}
+             {% if 'username' in session %}
                <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('login') }}">Login/Register <span class="sr-only">(current)</span></a>
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('myaccount') }}">My Account</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('logout') }}">Logout</a>
                </li>
                {% endif %}
-              {% if 'username' in session %}
-              <li class="nav-item">
-               <a class="nav-link" href="{{ url_for('myaccount') }}">My Account <span class="sr-only">(current)</span></a>
-           </li>
-              <li class="nav-item">
-               <a class="nav-link" href="{{ url_for('logout') }}">Logout <span class="sr-only">(current)</span></a>
-           </li>
-           {% endif %}
             </ul>
          </div>
       </nav>
    </div>
-   <body>
+   <body class="content">
       <div class="real-time-wind container d-flex flex-column justify-content-center align-items-center">
          <h3 class="text-center">
              Quarter hour averages table for local weather station (Tinto)
@@ -260,7 +271,7 @@
                </div>
                <div class="container">
                   <br>
-                  <h3 class="text-center">7-Day Weather Forecast</h3>
+                  <h3 class="text-center">5 Day Weather Forecast</h3>
                   <p class="text-center">While we do our best to make sure the forecasts are as accurate as possible you should always assess the conditions when you arrive at launch and decide for yourself if it's safe for you to fly.</p>
                </div>
                <div class="table-responsive">
@@ -400,7 +411,7 @@
                      </div>
                      <div class="container">
                         <br>
-                        <h3 class="text-center">7-Day Weather Forecast</h3>
+                        <h3 class="text-center">5 Day Weather Forecast</h3>
                         <p class="text-center">While we do our best to make sure the forecasts are as accurate as possible you should always assess the conditions when you arrive at launch and decide for yourself if it's safe for you to fly.</p>
                      </div>
                      <div class="table-responsive">
@@ -497,7 +508,7 @@
                      </div>
                      <div class="container">
                         <br>
-                        <h3 class="text-center">7-Day Weather Forecast</h3>
+                        <h3 class="text-center">5 Day Weather Forecast</h3>
                         <p class="text-center">While we do our best to make sure the forecasts are as accurate as possible you should always assess the conditions when you arrive at launch and decide for yourself if it's safe for you to fly.</p>
                      </div>
                      <div class="table-responsive">
@@ -594,7 +605,7 @@
                      </div>
                      <div class="container">
                         <br>
-                        <h3 class="text-center">7-Day Weather Forecast</h3>
+                        <h3 class="text-center">5 Day Weather Forecast</h3>
                         <p class="text-center">While we do our best to make sure the forecasts are as accurate as possible you should always assess the conditions when you arrive at launch and decide for yourself if it's safe for you to fly.</p>
                      </div>
                      <div class="table-responsive">
@@ -635,6 +646,7 @@
    </div>
    {% endif %}
       <!-- Dungeval Ends here-->
+
       <script src="{{ url_for('static', filename='script.js') }}"></script>
    </body>
 </html>

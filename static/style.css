@@ -3,8 +3,11 @@
  
 }body {
   font-family: "Open Sans", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 header {
@@ -93,8 +96,7 @@ a {
   transition: all 0.3s ease-in-out; /* Add smooth hover transition */
 }
 a:hover {
-  color: #ffffff; /* Set link color to white on hover */
-  /*background-color: #0077ff; Add blue background on hover */
+  color: #60bdfb6d; /* Set link color to white on hover */
   text-decoration: none; /* Remove underline on hover */
 }
 .main {
@@ -375,4 +377,37 @@ button {
 /* Style the individual flashed messages */
 .flash-messages-container .alert {
   margin-bottom: 5px; /* Adjust margin between messages */
+}
+
+/* Style Navbar */
+
+
+.bg-dark {
+  background-color: Black !important;
+}
+
+.bg-light {
+  background-color: WhiteSmoke !important;
+}
+
+.bg-trees {
+  background-image: url(https://source.unsplash.com/1920x1080/?paragliding);
+  background-size: cover;
+  background-position: center;
+}
+
+.py-6 {
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+
+.py-7 {
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
+@media (min-width: 992px) {
+   .border-lg-0 {
+      border: none !important;
+   }
 }
