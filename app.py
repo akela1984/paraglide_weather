@@ -11,6 +11,14 @@ app.secret_key = '5d2a1f0f7bba42f6a5476c1e1a683376'
 def index():
     return render_template('index.html')
 
+@app.route('/links')
+def links():
+    return render_template('links.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':

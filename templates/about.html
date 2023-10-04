@@ -68,7 +68,7 @@
               <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('links') }}">Links</a>
            </li>
            <li class="nav-item">
-              <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('about') }}">About</a>
+              <a class="nav-link px-4 px-lg-2 py-3 active" aria-current="page" href="{{ url_for('about') }}">About</a>
            </li>
          </ul>
    
@@ -78,7 +78,7 @@
           <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('login') }}">Login</a>
        </li>
        <li class="nav-item">
-          <a class="nav-link px-4 px-lg-2 py-3 active" aria-current="page" href="{{ url_for('register') }}">Register</a>
+          <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('register') }}">Register</a>
        </li>
         {% endif %}
           {% if 'username' in session %}
@@ -95,33 +95,45 @@
     </div>
   </div>
   <body class="content">
-    <div class="register-container">
-      <h2>Register</h2>
-      <form method="POST" action="{{ url_for('register') }}">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" name="username" required>
+<div class="about-container">
+    <div class="article-details " itemscope="" itemtype="https://schema.org/Article">
+        <meta itemprop="inLanguage" content="en-GB">
+        <div class="article-can-edit d-flex flex-wrap justify-content-between">
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" required>
+        <div itemprop="articleBody">
+           <h3>Introduction</h3>
+           <p>The LLSC has been in existence since 1975. We are a <a title="Link to the BHPA website" href="https://www.bhpa.co.uk/" target="_blank" rel="noopener noreferrer">BHPA</a> member and also a member of the <a title="Link to SHPF website" href="https://shpf.co.uk/" target="_blank" rel="noopener noreferrer">SHPF</a>. Hang gliding and Paragliding clubs are different to other sports clubs in that we are not able to provide training - that is the role of the licensed schools. However, we do provide support for newly qualified pilots to develop their skills, and for more experienced members, we provide all the other aspects of typical sports club membership.</p>
+           <h3>Officers</h3>
+           <p>There are no paid officers of the club. All Committee members are volunteers, giving up their time freely. The Club has a very varied membership with a huge variety of skills - give&nbsp;volunteering as a Committee member a go yourself! The committee members with links can be contacted via a form (click the link)</p>
+           <ul>
+              <li>Chairman - Ben Johnson</li>
+              <li>Secretary - &lt;vacant position&gt;</li>
+              <li>Safety Officer - Chris Sangwin</li>
+              <li>SHPF Liaison Officer - Alistair Bowman</li>
+              <li>Treasurer and Membership Secretary - Ian Kennedy</li>
+              <li>Website Officer - Mark Bradley</li>
+              <li>PG Chief Coach - Fred Robinson</li>
+              <li>Hang gliding Officer - &lt;vacant position&gt;</li>
+              <li>Power Paragliding Officer - Bruce Barrack</li>
+              <li>Forestry Officer - Alistair Bowman</li>
+              <li>Sites Officer - Kevin McGrath</li>
+              <li>Trophies' Custodian - &lt;vacant position&gt;</li>
+              <li>COVID officer - &lt;vacant position&gt;</li>
+           </ul>
+           <h3>Club House</h3>
+           <p>We don't have a "club house" - the hills from which we fly provide that function for us. With modern communications, it is relatively easy for several pilots to arrange to meet at the most suitable flying site for their skills, experience and the weather conditions on the day. In addition, local informal groups of pilots organise both flying days and evening meets in pubs.</p>
+           <h3>Coaches</h3>
+           <p>The principle means of supporting recently qualified - and less recently - pilots is via our coaches. Again, HG and PG club coaches differ from most other sports in that they are not allowed to provide formal training, but are themselves trained to provide appropriate coaching and guidance for developing member pilots at almost all levels.</p>
+           <h3>Events</h3>
+           <p>The Club runs at least one social event a year,&nbsp;most recently as a late summer barbecue and overnight camp - a great chance to exchange "there I was...." type stories. Other events might include first aid training, coaching to pass post-CP BHPA exams or similar such activities.</p>
+           <h3>Meetings</h3>
+           <p>In the winter months, the club organises monthly (usually) meetings in a convenient location, normally a pub - of course - with a function&nbsp;room or other suitable space. At these meetings, members or invited guests with specialist flying-related knowledge give a talk on a topic. Less formally, there a often regular social meets in pubs for pilots in the Glasgow and Edinburgh areas.</p>
+           <h3>Projects</h3>
+           <p>Occasionally the Club will become involved in one-off projects. Notable examples of this include supporting the development of a national pilot development software service (the <a title="Link to the relevant area of the BHPA website" href="https://www.bhpa.co.uk/sport/bhpa/welcome.php" target="_blank" rel="noopener noreferrer">Pilot Development Scheme - PDS</a>) and support of a scientific research project relating to design and human factors of emergency reserve parachute deployment.</p>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="license_type">License Type</label>
-          <select class="form-control" id="license_type" name="license_type" required>
-            <option value="EP - Elementery Pilot">EP - Elementery Pilot</option>
-            <option value="CP - Club Pilot">CP - Club Pilot</option>
-            <option value="Pilot">Pilot</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Register</button>
-      </form>
-    </div>
-
+     </div>
+</div>
+    
     <div class="flash-messages-container">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}

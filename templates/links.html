@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="hu">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Paragliding Sites</title>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Q0L1YYED4"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         
+         function gtag() {
+           dataLayer.push(arguments);
+         }
+         gtag("js", new Date());
+         
+         gtag("config", "G-0Q0L1YYED4");
+      </script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg=="
+         crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <!-- Include jQuery -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <!-- Include Popper.js (required for Bootstrap) -->
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+      <!-- Include Bootstrap JavaScript -->
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <script src="https://kit.fontawesome.com/d3c4500f30.js" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js" integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g==" crossorigin="anonymous"
+         referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA=="
+         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity="sha512-RdSPYh1WA6BF0RhpisYJVYkOyTzK4HwofJ3Q7ivt/jkpW6Vc8AurL1R+4AUcvn9IwEKAPm/fk7qFZW3OuiUDeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script type="text/javascript">
+         $(function() {
+           bootbox.setLocale("Us"); /*$(document).tooltip();*/
+         });
+      </script>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+   </head>
+   <div class="container-xl main">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-0">
+         <a class="navbar-brand bg-primary px-4 py-3" href="{{ url_for('index') }}">
+         L L S C
+         </a>
+         <button class="navbar-toggler px-4 py-3 border-0" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            >+</button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav border-top border-lg-0">
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('index') }}">Home </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('sites') }}">Local Sites</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3 active" aria-current="page" href="{{ url_for('links') }}">Links</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('about') }}">About</a>
+               </li>
+            </ul>
+            <ul class="navbar-nav ms-auto me-0 me-lg-3 border-top border-lg-0">
+               {% if 'username' not in session %}
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('login') }}">Login</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('register') }}">Register</a>
+               </li>
+               {% endif %}
+               {% if 'username' in session %}
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('myaccount') }}">My Account</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('logout') }}">Logout</a>
+               </li>
+               {% endif %}
+            </ul>
+         </div>
+      </nav>
+   </div>
+   </div>
+   <body class="content">
+    <div class="links-container">
+      <div class="article-details " itemscope="" itemtype="https://schema.org/Article">
+         <meta itemprop="inLanguage" content="en-GB">
+         <div class="article-can-edit d-flex flex-wrap justify-content-between">
+         </div>
+         <div itemprop="articleBody">
+            <p>The following links are grouped&nbsp;for clarity and provided for&nbsp;convenience. Their inclusion is not an endorsement of any commercial products or services offered.&nbsp;Given there are over <a title="Link to internet live stats website" href="https://www.internetlivestats.com/total-number-of-websites/" target="_blank" rel="noopener noreferrer">1.5 billion websites world wide</a>, these lists are not exhaustive.</p>
+            <h3>Weather</h3>
+            <ul>
+               <li><a title="Link to windy.com website" href="https://www.windy.com/" target="_blank" rel="noopener noreferrer">Windy</a> - a weather website to cater to free flyers; has multiple predictive models and allows for height selection, useful for assessing possible wind on hills and wind gradient</li>
+               <li><a title="Link to XC Weather website" href="https://xcweather.co.uk/" target="_blank" rel="noopener noreferrer">xcweather</a> - a straight forward site for looking at wind and weather from a free flying perspective</li>
+               <li><a title="Link to RASP (Stratus) website" href="http://rasp.stratus.org.uk/app/viewer.php" target="_blank" rel="noopener noreferrer">RASP</a> - Regional Atmospheric Soaring Prediction. Extremely useful site for helping decide if a day within the next 5 is likely to be a good cross country day</li>
+               <li><a title="Link to RASP tailored for PG / HG use" href="http://xcpara.co.uk/index.php/weather/rasp-synoptic" target="_blank" rel="noopener noreferrer">XC Para - RASP</a> - link to a more PG / HG tailored version of RASP (works well on mobile devices)</li>
+               <li><a title="Link to UK Met Office website" href="https://www.metoffice.gov.uk/" target="_blank" rel="noopener noreferrer">Met Office</a> - An old fallback; helpful forecasts of general weather up to several days in advance</li>
+               <li><a title="Link to the remove live weather station at Tinto" href="https://holfuy.com/en/weather/950" target="_blank" rel="noopener noreferrer">Tinto weather station</a> - The Club runs a weather station as its "main" flying site on Tinto</li>
+            </ul>
+            <h3>Regulatory Authorities / Related</h3>
+            <ul>
+               <li><a title="Link to the BHPA website" href="https://www.bhpa.co.uk/" target="_blank" rel="noopener noreferrer">BHPA</a> - the UK national body, the British Hang gliding and Paragliding Association</li>
+               <li><a title="Link to SHPF website" href="https://www.shpf.co.uk/" target="_blank" rel="noopener noreferrer">SHPF</a> - the Scottish Hang gliding and Paragliding Federation</li>
+               <li><a title="Link to NATS website" href="http://www.nats-uk.ead-it.com/public/index.php%3Foption=com_content&amp;task=blogcategory&amp;id=166&amp;Itemid=4.html" target="_blank" rel="noopener noreferrer">NOTAMs (NATS)</a> - the National Air Traffic System site with information on NOTAMs (Notices to Airmen)</li>
+               <li><a title="Link to NOTAMinfo website" href="https://notaminfo.com/ukmap" target="_blank" rel="noopener noreferrer">NOTAMinfo</a>&nbsp;- a helpful site showing known NOTAMs and areas affected</li>
+               <li><a title="Link to CANP on BHPA website" href="https://www.bhpa.co.uk/documents/safety/canp/" target="_blank" rel="noopener noreferrer">CANP</a> - the BHPA website page dedicated to the Civil Aircraft Notification Procedure</li>
+               <li><a title="Link to CANP notification app" href="https://canp.logans.me.uk/" target="_blank" rel="noopener noreferrer">CANP app</a> - a very useful website for entering notifications under the Civil Aircraft Notification Procedure</li>
+               <li><a title="Link to CIVL section of FAI website" href="https://www.fai.org/commission/civl" target="_blank" rel="noopener noreferrer">FAI CIVL</a> - the Fédération Aéronautique Internationale, free flight section (CIVL) website</li>
+               <li><a title="Link toe Air Turquoise / Para Test website" href="https://para-test.com/reports" target="_blank" rel="noopener noreferrer">Air Turquoise</a> - French testing house, reports website</li>
+               <li><a title="Link to the PG test report area of the DHV website" href="http://www.dhv.de/db1/technicsearchpage.php?lang=EN" target="_blank" rel="noopener noreferrer">DHV Test Reports</a> - the German authority's test report database</li>
+            </ul>
+            <h3>Flying Sites</h3>
+            <ul>
+               <li><a title="Link to Paragliding.Earth website" href="https://paraglidingearth.com/" target="_blank" rel="noopener noreferrer">Paragliding Earth</a> - a well thought out website with 5323 (February 2020) flying sites around the world</li>
+               <li><a title="Link to Paragliding Map" href="https://www.paraglidingmap.com/app/" target="_blank" rel="noopener noreferrer">Paragliding Map</a> - another well thought out site, combining data from several sources (including Paragliding Earth) and weather information to give indications of suitable flying sites for a given day</li>
+            </ul>
+            <h3>Neighbouring Clubs</h3>
+            <ul>
+               <li><a title="Link to Aberdeen HG &amp; PG Club" href="https://www.ahpc.org.uk" target="_blank" rel="noopener noreferrer">Aberdeen HG &amp; PG Club</a> - covering the Aberdeen and surrounding area</li>
+               <li><a title="Link to Highland HG &amp; PG Club" href="https://www.highlandhgpgclub.co.uk" target="_blank" rel="noopener noreferrer">Highland HG &amp; PG Club</a> - covering the western Highlands</li>
+               <li>SMP - Scottish Mountain Paragliding&nbsp; (currently without a website - see <a href="https://www.bhpa.co.uk/clubs/clubs.php">https://www.bhpa.co.uk/clubs/clubs.php</a>)</li>
+               <li><a title="Link to Wingbeat Paragliding Club" href="https://www.wingbeat-paragliding.co.uk" target="_blank" rel="noopener noreferrer">Wingbeat Paragliding Club</a> - covering the eastern Borders</li>
+               <li><a title="Link to Northumbria HG &amp; PG Club website" href="https://www.nhpc.org.uk" target="_blank" rel="noopener noreferrer">Northumbria HG &amp; PG Club</a> - covering the very north east of England</li>
+               <li><a title="Link to the Cumbria Soaring Club website" href="https://www.cumbriasoaringclub.co.uk" target="_blank" rel="noopener noreferrer">Cumbria Soaring Club</a> - covering the Lake District of England</li>
+            </ul>
+            <h3>Competitions / Leagues</h3>
+            <ul>
+               <li><a title="Link to the XC League Paragliding website" href="http://www.xcleague.com/xc/index.php" target="_blank" rel="noopener noreferrer">XC League</a> - for UK paragliding flights and several club leagues.</li>
+               <li><a title="Link to the UK XC League for hang gliding" href="http://www.uknxcl.co.uk/" target="_blank" rel="noopener noreferrer">XC League for Hang gliding</a></li>
+               <li><a title="Link to the BPS website" href="https://www.bpcup.co.uk/" target="_blank" rel="prefetch noopener noreferrer">British Paragliding Cup (BPC)</a> - for UK pilots starting out on competitions; some rounds may be outside the UK</li>
+               <li><a title="Link to the UK PG Comps website" href="https://pgcomps.org.uk/" target="_blank" rel="noopener noreferrer">British Opens</a> - covering the BP Cup and other UK compettions, including the BCC (British Club Challenge)</li>
+               <li><a title="Link to the GIN Fly Wide Open website" href="https://flywideopen.com/" target="_blank" rel="noopener noreferrer">GIN Wide Open</a> - a very popular entry level international PG competition</li>
+               <li><a title="Link to the Naviter Open website hosted at Air Tribune" href="https://airtribune.com/naviteropen/info" target="_blank" rel="noopener noreferrer">Naviter Open</a> -&nbsp;another very popular entry level international PG competition</li>
+               <li><a title="Link to the Ozone Open website hosted at Fly Laragne" href="http://www.flylaragne.com/" target="_blank" rel="noopener noreferrer">Ozone Chabre Open</a> -&nbsp;and another very popular entry level international PG competition</li>
+               <li><a title="Link to the PWCA website" href="http://www.pwca.org/" target="_blank" rel="noopener noreferrer">Paragliding World Cup (PWC)</a> - one of the leading international PG competitions</li>
+               <li><a title="Link to the relevant area of the FAI CIVL website" href="https://www.fai.org/sport/hang-gliding?upcoming=1&amp;f%5B0%5D=fai_event_year%3A2020&amp;display=list" target="_blank" rel="noopener noreferrer">World Hang Gliding competitions</a></li>
+               <li><a title="Link to the Red Bull X-Alps website" href="https://www.redbullxalps.com/" target="_blank" rel="noopener noreferrer">X-Alps</a> - an astounding PG competition taking place alternate years. Competitors fly or go on foot from one end of the <a title="Link to the Wikipedia article on the European Alps" href="https://en.wikipedia.org/wiki/Alps" target="_blank" rel="noopener noreferrer">European Alps</a> to the other</li>
+               <li><a title="Link to the X-Pyr website" href="https://www.x-pyr.com/en/" target="_blank" rel="noopener noreferrer">X-Pyr</a> - similar to the X-Alps but across the Pyrenees</li>
+               <li><a title="Link to the Accuracy section of the BHPA website" href="https://bhpa-accuracy.org.uk/?page_id=11" target="_blank" rel="noopener noreferrer">Paragliding Accuracy</a> - pilots land on very small targets with amazing accuracy</li>
+               <li><a title="Link to the Acro World Tour section of the FAI website" href="https://www.fai.org/acroworldtour" target="_blank" rel="noopener noreferrer">Paragliding Acro</a> - solo and multiple pilots perform aerial tricks with astounding fluidity, beauty and accuracy - as with snowboarding, some of the tricks have incomprehensible names</li>
+            </ul>
+            <h3>Fora / Blogs / Magazines / Reviews</h3>
+            <ul>
+               <li><a title="Link to the Paragliding Forum website" href="https://www.paraglidingforum.com/" target="_blank" rel="noopener noreferrer">Paragliding Forum</a></li>
+               <li><a title="Link to The Paraglider website" href="https://www.theparaglider.com/" target="_blank" rel="noopener noreferrer">TheParaglider.com</a> - an excellent collection of articles and podcasts about paragliding topics - run by UK&nbsp;Caedmon Mullin and Spain based Judith Mole</li>
+               <li><a title="Link to the Cloudbase Mayhem website" href="https://www.cloudbasemayhem.com/" target="_blank" rel="noopener noreferrer">Cloudbase Mayhem</a> - a great blog and collection of podcasts on paragliding and adventure topics by the US's Gavin McClurg</li>
+               <li><a title="Link to Cross Country Magazine website" href="https://xcmag.com/" target="_blank" rel="noopener noreferrer">Cross Country&nbsp;Magazine</a> - a (the?) leading English language magazine for hang gliding and paragliding</li>
+               <li><a title="Link to Ziad Bassil's PG blog" href="http://ziadbassil.blogspot.com/" target="_blank" rel="noopener noreferrer">Dust of the Universe</a> - a blog run by Ziad Bassil with a particular focus on PG wing reviews</li>
+               <li><a title="Link to British Hang Gliding History - Scotland, page" href="http://www.british-hang-gliding-history.com/scotland/" target="_blank" rel="noopener noreferrer">British Hang Gliding History - Scotland</a> - great article on the history of hang gliding in Scotland with a number of key active "names" in the making of that history</li>
+            </ul>
+            <h3>Some Manufacturers</h3>
+            <p>HG -&nbsp;<a class="external text" title="Link to Aeriane website" href="http://www.aeriane.com/" target="_blank" rel="noopener noreferrer">Aeriane Swift</a>,&nbsp;<a class="external text" title="Link to the Aeros website" href="http://www.aeros.com.ua/" target="_blank" rel="noopener noreferrer">Aeros</a>,&nbsp;<a class="external text" title="Link to the Airborne website" href="http://www.airborne.com.au/" target="_blank" rel="noopener noreferrer">Airborne</a>,&nbsp;<a class="external text" title="Link to the Avian webiste" href="http://www.avianonline.co.uk/" target="_blank" rel="noopener noreferrer">Avian</a>,&nbsp;<a class="external text" title="Link to the Bautek website" href="http://www.bautek.com/" target="_blank" rel="noopener noreferrer">Bautek</a>, <a class="external text" title="Link to the Eclipse website" href="http://www.ellipse-delta.com/" target="_blank" rel="noopener noreferrer">Ellipse</a>,&nbsp;<a class="external text" title="Link to the Finsterwalder / Charly website, hang glider section" href="http://www.finsterwalder-charly.de/en/hanggliders-a-accessories.html" target="_blank" rel="noopener noreferrer">Finsterwalder</a>,&nbsp; <a title="Link to Icaro 2000 website" href="https://www.icaro2000.com/" target="_blank" rel="noopener noreferrer">Icaro 2000</a>,&nbsp;<a class="external text" title="Link to the Ikarus website" href="http://www.ikaruspellicci.de/" target="_blank" rel="noopener noreferrer">Ikarus</a>,&nbsp;<a class="external text" title="Link to the La Mouette website" href="http://www.lamouette.com/" target="_blank" rel="noopener noreferrer">La Mouette</a>,&nbsp;<a class="external text" title="Link to the Moyes website" href="http://www.moyes.com.au/" target="_blank" rel="noopener noreferrer">Moyes</a>,&nbsp;<a class="external text" title="Link to the North Wing website" href="http://www.northwing.com/" target="_blank" rel="noopener noreferrer">North Wing</a>,&nbsp;<a class="external text" title="Link to the Quaser website" href="http://www.hanggliding.cz/en/index.php" target="_blank" rel="noopener noreferrer">Quasar</a>,&nbsp;<a class="external text" title="Link to the Ulteam website" href="http://www.ulteam-vol-libre.com/" target="_blank" rel="noopener noreferrer">Ulteam</a>, <a title="Link to hang glider section of Union website" href="http://www.parapendio-deltaplano.it/deltaplano.html" target="_blank" rel="noopener noreferrer">Union</a>,&nbsp;<a class="external text" title="Link to the UP Gliders (USA hang gliders) website" href="http://upgliders.com/" target="_blank" rel="noopener noreferrer">UP Gliders</a>,&nbsp;<a class="external text" title="Link to the Wills Wing website" href="http://www.willswing.com/index.asp" target="_blank" rel="noopener noreferrer">Wills Wing</a>, <a title="Link to hang gliding section of Woody Valley website" href="https://www.woodyvalley.eu/en/cat/hang-gliding/" target="_blank" rel="noopener noreferrer">Woody Valley</a></p>
+            <p>PG - <a title="Link to Advance website" href="https://www.advance.ch/en/home/" target="_blank" rel="noopener noreferrer">Advance</a>,&nbsp;<a title="Link to APCO Aviation website" href="https://www.apcoaviation.com/" target="_blank" rel="noopener noreferrer">APCO</a>, <a title="Link to Axis website" href="https://axispara.cz/" target="_blank" rel="noopener noreferrer">Axis</a>,&nbsp;<a title="Link to Bruce Goldsmith Design Paragliders website" href="https://www.flybgd.com/en/" target="_blank" rel="noopener noreferrer">BGD</a>, <a title="Link to Dudek website" href="https://www.dudek.eu/en/paragliders/" target="_blank" rel="noopener noreferrer">Dudek</a>,&nbsp;<a title="Link to GIN website" href="https://www.gingliders.com/en" target="_blank" rel="noopener noreferrer">GIN</a>, <a title="Link to Gradient website" href="https://gradient-gliders.com/en/homepage/" target="_blank" rel="noopener noreferrer">Gradient</a>, <a title="Link to Icaro paragliders" href="https://icaro-paragliders.com/en/" target="_blank" rel="noopener noreferrer">Icaro</a>, <a title="Link to Independence website" href="https://www.independence.aero/en/welcome.html" target="_blank" rel="noopener noreferrer">Independence</a>, <a title="Link to Kortel Design website" href="https://www.korteldesign.com/en/" target="_blank" rel="noopener noreferrer">Kortel</a>,&nbsp;<a title="Link to Mac Para website" href="https://www.macpara.com/en/paragliders/free-flying/" target="_blank" rel="noopener noreferrer">Mac Para</a>, <a title="Link to Niviuk website" href="http://niviuk.com/en/" target="_blank" rel="noopener noreferrer">Niviuk</a>, <a title="Link to Nova website" href="https://www.nova.eu/en/home/" target="_blank" rel="noopener noreferrer">Nova</a>, <a title="Link to Ozone's paragliding products website" href="https://www.flyozone.com/paragliders/" target="_blank" rel="noopener noreferrer">Ozone</a>, <a title="Link to Sol website - based in Brasil" href="http://www.solparagliders.com.br/" target="_blank" rel="noopener noreferrer">Sol, </a><a title="Link to Skyman website" href="https://www.skyman.aero/en/home.html" target="_blank" rel="noopener noreferrer">Skyman</a>, <a title="Link to Skywalk website" href="https://skywalk.info/" target="_blank" rel="noopener noreferrer">Skywalk</a>, <a title="Link to Supair website" href="https://www.supair.com/en/" target="_blank" rel="noopener noreferrer">Supair</a>,&nbsp;<a title="Link to Swing website" href="http://www.swing.de/homepage.html" target="_blank" rel="noopener noreferrer">Swing</a>, <a title="Link to Triple Seven website" href="https://777gliders.com/" target="_blank" rel="noopener noreferrer">Triple Seven</a>, <a title="Link to U-Turn website" href="http://www.u-turn.de/web/english/products/paragliders" target="_blank" rel="noopener noreferrer">U-Turn</a>, <a title="Link to Ultralight Products paraglider website" href="https://www.up-paragliders.com/en/" target="_blank" rel="noopener noreferrer">UP</a>, <a title="Link to paragliding section of Woody Valley website" href="https://www.woodyvalley.eu/en/cat/paragliding/" target="_blank" rel="noopener noreferrer">Woody Valley</a></p>
+            <p>Instruments - <a title="Link to Flymaster website" href="https://www.flymaster.net/" target="_blank" rel="noopener noreferrer">Flymaster</a>, <a title="Link to the inReach section of the Garmin website" href="https://explore.garmin.com/en-GB/inreach/" target="_blank" rel="noopener noreferrer">Garmin - inReach</a>,&nbsp;<a title="Link to Naviter / Flytec / Braeuniger website" href="https://www.naviter.com/" target="_blank" rel="noopener noreferrer">Naviter</a>, <a title="Link to the Renschler website" href="http://www.renschler.de/eng/pages/produkte_e/frmprod1_e.html" target="_blank" rel="noopener noreferrer">Renschler</a>,&nbsp;<a title="Link to the Skybean website" href="https://skybean.eu/" target="_blank" rel="noopener noreferrer">Skybean/Skydrop</a>,&nbsp;<a title="Link to Syride website" href="https://www.syride.com/en/home" target="_blank" rel="noopener noreferrer">Syride</a></p>
+            <p>Other - <a title="Link to X-Dream Fly website" href="http://www.x-dreamfly.ch/en/sample-page-2-2/" target="_blank" rel="noopener noreferrer">X-Dream Fly</a></p>
+            <h3>Other</h3>
+            <p>Non-flying films involving flying - <a title="Link to IMDB" href="https://www.imdb.com/title/tt0381957/" target="_blank" rel="noopener noreferrer">Cloud Cuckoo Land</a>, <a title="Link to IMDB" href="https://www.imdb.com/title/tt1675434/?ref_=kw_li_tt" target="_blank" rel="noopener noreferrer">Untouchable</a>&nbsp;(remade in English as <a title="Link to IMDB details about The Upside" href="https://www.imdb.com/title/tt1987680/?ref_=fn_al_tt_1" target="_blank" rel="noopener noreferrer">The Upside</a>),&nbsp;<a title="Link to IMDB" href="https://www.imdb.com/title/tt0163025/" target="_blank" rel="noopener noreferrer">Jurassic Park III</a></p>
+            <p>&nbsp;</p>
+         </div>
+      </div>
+    </div>
+      <div class="flash-messages-container">
+         {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+         {% for category, message in messages %}
+         <div class="alert alert-{{ category }} d-flex flex-column justify-content-center align-items-center">
+            {{ message }}
+         </div>
+         {% endfor %}
+         {% endif %}
+         {% endwith %}
+      </div>
+      <script src="{{ url_for('static', filename='script.js') }}"></script>
+   </body>
+</html>
