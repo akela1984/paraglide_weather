@@ -92,6 +92,26 @@ def myaccount():
     else:
         flash('You must be logged in to access this page.', 'danger')
         return redirect(url_for('login'))
+@app.route('/update_account', methods=['POST'])
+def update_account():
+    if 'username' in session:
+        username = session['username']
+        email = request.form['email']
+        license_type = request.form['license_type']
+        
+        # Update user information in the database
+        try:
+            conn = sqlite3.connect('mydatabase.db')
+            cursor = conn.cursor()
+            cursor.execute("UPDATE users SET email=?, license_type=? WHERE username=?", (email, license_type, username))
+            conn.commit()
+            conn.close()
+            flash('Account information updated successfully', 'success')
+        except sqlite3.Error as e:
+            flash('Failed to update account information. Please try again.', 'danger')
+    
+    return redirect(url_for('myaccount'))
+
 
 @app.route('/logout')
 def logout():

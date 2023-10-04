@@ -79,13 +79,33 @@
   </div>
   <body>
     <div class="profile-container">
-      <h1>Welcome to My Account, {{ username }}!</h1>
-      <div class="profile-details">
-        <p>Your Email: {{ email }}</p>
-        <p>License Type: {{ license_type }}</p>
-      </div>
-      <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a>
-    </div>
+      <h1>Welcome {{ username }}!</h1>
+      <form method="POST" action="{{ url_for('update_account') }}">
+          <div class="profile-details">
+              <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" class="form-control" id="username" name="username" value="{{ username }}" disabled>
+                  <small class="form-text text-muted">Username cannot be changed.</small>
+              </div>
+              <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" name="email" value="{{ email }}" required>
+              </div>
+              <div class="form-group">
+                  <label for="license_type">License Type:</label>
+                  <select class="form-control" id="license_type" name="license_type" required>
+                      <option value="EP - Elementery Pilot" {% if license_type == "EP - Elementery Pilot" %} selected {% endif %}>EP - Elementery Pilot</option>
+                      <option value="CP - Club Pilot" {% if license_type == "CP - Club Pilot" %} selected {% endif %}>CP - Club Pilot</option>
+                      <option value="Pilot" {% if license_type == "Pilot" %} selected {% endif %}>Pilot</option>
+                  </select>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+      </form>
+      <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to Home</a>
+  </div>
+  
+  
     
     <div class="flash-messages-container">
         {% with messages = get_flashed_messages(with_categories=true) %}
