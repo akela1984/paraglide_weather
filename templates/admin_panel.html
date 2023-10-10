@@ -116,46 +116,94 @@
             <div class="tab-content mt-3" id="myTabContent">
                 <!-- News Tab Content -->
                 <div class="tab-pane fade show active" id="news" role="tabpanel" aria-labelledby="news-tab">
-                    <!-- Content for the News tab goes here -->
-                            <div class="container mt-5">
-                                <h3>Add News</h3>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="textbox">Text Box:</label>
-                                        <input type="text" class="form-control" id="textbox" placeholder="Enter news text here">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
-                </div>
+                  <!-- Content for the News tab goes here -->
+                  <div class="container mt-5">
+                      <h3>Add News</h3>
+                      <form method="POST" action="/add_news"> <!-- Added method and action attributes -->
+                          <div class="form-group">
+                              <label for="date">Date:</label>
+                              <input type="date" class="form-control" id="date" name="date" required> <!-- Added name attribute -->
+                          </div>
+                          <div class="form-group">
+                              <label for="title">Title:</label> <!-- Changed id attribute to "title" to avoid duplication -->
+                              <input type="text" class="form-control" id="title" name="title" placeholder="Enter news title" required> <!-- Added name attribute -->
+                          </div>
+                          <div class="form-group">
+                           <label for="text">Text:</label> <!-- Changed id attribute to "text" to avoid duplication -->
+                           <textarea class="form-control" id="text" name="text" placeholder="Enter news text" rows="5" required></textarea> <!-- Changed to textarea and added rows attribute -->
+                       </div>
+                       
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                  </div>
+                  <div class="container mt-5">
+                     <h3>List of News</h3>
+                     <table class="table table-bordered">
+                         <thead>
+                             <tr>
+                                 <th>Date</th>
+                                 <th>Title</th>
+                                 <th>Text</th>
+                                 <th>Action</th>
+
+                             </tr>
+                         </thead>
+                         <tbody>
+                           {% for news_item in news %}
+                           <tr>
+                              <td>{{ news_item[0].split(' ')[0] }}</td>
+                              <td>{{ news_item[1] }}</td>
+                              <td>{{ news_item[2] }}</td>
+                              <td>
+                                  <form action="/delete_news" method="POST">
+                                      <input type="hidden" name="date" value="{{ news_item[0] }}">
+                                      <input type="hidden" name="title" value="{{ news_item[1] }}">
+                                      <input type="hidden" name="text" value="{{ news_item[2] }}">
+                                      <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ news_item[1] }}')">Delete</button>
+                                  </form>
+                              </td>
+                          </tr>
+                           {% endfor %}
+                       </tbody>
+                     </table>
+                 </div>
+                 
+                 
+              </div>              
                 
                 <!-- Users Tab Content -->
                 <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
-                    <!-- Content for the Users tab goes here -->
-                    <div class="container mt-5">
-                        <h3>Registered Users</h3>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <!-- Add other user details headers here -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for user in users %}
-                                <tr>
-                                    <td>{{ user[0] }}</td>
-                                    <td>{{ user[1] }}</td>
-                                    <td>{{ user[3] }}</td>
-                                    <!-- Add other user details here -->
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                  <!-- Content for the Users tab goes here -->
+                  <div class="container mt-5">
+                      <h3>Registered Users</h3>
+                      <table class="table table-bordered">
+                          <thead>
+                              <tr>
+                                  <th>ID</th>
+                                  <th>Username</th>
+                                  <th>Email</th>
+                                  <th>Action</th> <!-- Add a new column for the "Delete" button -->
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {% for user in users %}
+                              <tr>
+                                  <td>{{ user[0] }}</td>
+                                  <td>{{ user[1] }}</td>
+                                  <td>{{ user[3] }}</td>
+                                  <td>
+                                      <form action="/delete_user" method="POST">
+                                          <input type="hidden" name="user_id" value="{{ user[0] }}">
+                                          <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmDeleteUser('{{ user[1] }}')">Delete</button>
+                                      </form>
+                                  </td>
+                              </tr>
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              
                 
                 <!-- Sites Tab Content -->
                 <div class="tab-pane fade" id="sites" role="tabpanel" aria-labelledby="sites-tab">
@@ -183,5 +231,21 @@
          {% endwith %}
       </div>
       <script src="{{ url_for('static', filename='script.js') }}"></script>
+      <script>
+         function confirmDelete(title) {
+             if (confirm(`Are you sure you want to delete the news item "${title}"?`)) {
+                 // If confirmed, submit the form
+                 document.querySelector(`form input[name="title"][value="${title}"]`).closest("form").submit();
+             }
+         }
+     </script>
+     <script>
+      function confirmDeleteUser(username) {
+          if (confirm(`Are you sure you want to delete the user "${username}"?`)) {
+              // If confirmed, submit the form
+              document.querySelector(`form input[name="user_id"][value="${username}"]`).closest("form").submit();
+          }
+      }
+  </script>
    </body>
 </html>

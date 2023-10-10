@@ -7,9 +7,35 @@ import bcrypt
 app = Flask(__name__)
 app.secret_key = '5d2a1f0f7bba42f6a5476c1e1a683376' 
 
+def get_news_from_database():
+    try:
+        conn = sqlite3.connect('mydatabase.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT date, title, text FROM news")
+        news_data = cursor.fetchall()
+        conn.close()
+        return news_data
+    except sqlite3.Error as e:
+        # Handle database errors here
+        return []
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    try:
+        conn = sqlite3.connect('mydatabase.db')
+        cursor = conn.cursor()
+
+        # Fetch the latest 10 news items from the database
+        cursor.execute("SELECT date, title, text FROM news ORDER BY date DESC LIMIT 10")
+        latest_news = cursor.fetchall()
+
+        conn.close()
+
+        return render_template('index.html', latest_news=latest_news)
+    except sqlite3.Error as e:
+        flash('An error occurred while fetching news data.', 'danger')
+        return render_template('index.html', latest_news=[])  # Return an empty list if there's an error
+
 
 @app.route('/links')
 def links():
@@ -131,21 +157,122 @@ def admin_panel():
             cursor = conn.cursor()
             cursor.execute("SELECT * FROM users")
             users_data = cursor.fetchall()
+            
+            # Fetch news data from the database
+            news_data = get_news_from_database()
+            
             conn.close()
 
             if users_data:
                 # Assuming you want to display all users, you can pass the list of users
                 # to the template context.
-                return render_template('admin_panel.html', username=username, users=users_data)
+                return render_template('admin_panel.html', username=username, users=users_data, news=news_data)
             else:
                 flash('No users found in the database.', 'danger')
                 return redirect(url_for('index'))
         except sqlite3.Error as e:
-            flash('An error occurred while fetching user data.', 'danger')
+            flash('An error occurred while fetching data.', 'danger')
             return redirect(url_for('index'))
     else:
         flash('You must be logged in to access this page.', 'danger')
         return redirect(url_for('login'))
+
+
+@app.route('/add_news', methods=['POST'])
+def add_news():
+    if request.method == 'POST':
+        date = request.form['date']
+        title = request.form['title']
+        text = request.form['text']
+
+        # Convert the date string to a datetime object
+        try:
+            date_obj = datetime.strptime(date, '%Y-%m-%d')
+        except ValueError:
+            flash('Invalid date format. Please use YYYY-MM-DD.', 'danger')
+            return redirect(url_for('sites'))  # Redirect to the sites page
+
+        # Insert news data into the database
+        try:
+            conn = sqlite3.connect('mydatabase.db')
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO news (date, title, text) VALUES (?, ?, ?)",
+                           (date_obj, title, text))
+            conn.commit()
+            conn.close()
+            flash('News added successfully', 'success')
+        except sqlite3.Error as e:
+            flash('Failed to add news. Please try again.', 'danger')
+
+    return redirect(url_for('admin_panel'))  # Redirect to the admin_panel page after adding news
+
+@app.route('/delete_news', methods=['POST'])
+def delete_news():
+    if 'username' in session:
+        try:
+            conn = sqlite3.connect('mydatabase.db')
+            cursor = conn.cursor()
+
+            # Get the criteria for deleting news items
+            date = request.form.get('date')
+            title = request.form.get('title')
+            text = request.form.get('text')
+
+            # Delete news items based on the provided criteria
+            cursor.execute("DELETE FROM news WHERE date=? AND title=? AND text=?", (date, title, text))
+            conn.commit()
+            conn.close()
+            flash('News deleted successfully', 'success')
+            return redirect(url_for('admin_panel'))
+        except sqlite3.Error as e:
+            flash('An error occurred while deleting news.', 'danger')
+            return redirect(url_for('admin_panel'))
+    else:
+        flash('You must be logged in to delete news.', 'danger')
+        return redirect(url_for('login'))
+
+
+@app.route('/delete_user', methods=['POST'])
+def delete_user():
+    if 'username' in session:
+        if request.method == 'POST':
+            user_id = request.form.get('user_id')
+
+            try:
+                conn = sqlite3.connect('mydatabase.db')
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM users WHERE id=?", (user_id,))
+                conn.commit()
+                conn.close()
+                flash('User deleted successfully', 'success')
+            except sqlite3.Error as e:
+                flash('Failed to delete user. Please try again.', 'danger')
+        
+        return redirect(url_for('admin_panel'))  # Redirect to the admin_panel page after deletion
+    else:
+        flash('You must be logged in to access this page.', 'danger')
+        return redirect(url_for('login'))
+    
+    
+@app.route('/news/<string:title>')
+def news(title):
+    try:
+        # Fetch the full news item from the database based on the title
+        conn = sqlite3.connect('mydatabase.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT title, text, date FROM news WHERE title=?", (title,))
+        news_data = cursor.fetchone()
+        conn.close()
+
+        if news_data:
+            news_title, news_text, news_date = news_data
+            return render_template('news.html', news_title=news_title, news_text=news_text, news_date=news_date)
+        else:
+            flash('News not found in the database.', 'danger')
+            return redirect(url_for('index'))
+    except sqlite3.Error as e:
+        flash('An error occurred while fetching news data.', 'danger')
+        return redirect(url_for('index'))
 
 
 
