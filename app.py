@@ -275,8 +275,6 @@ def news(title):
         return redirect(url_for('index'))
 
 
-
-
 @app.route('/logout')
 def logout():
     session.pop('username', None)  # Remove the username from the session
