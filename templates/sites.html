@@ -78,6 +78,11 @@
              <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('register') }}">Register</a>
           </li>
            {% endif %}
+           {% if 'admin' in session and session['admin'] == 'yes' %}
+           <li class="nav-item">
+              <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('admin_panel') }}">Admin Panel</a>
+           </li>
+         {% endif %}
              {% if 'username' in session %}
                <li class="nav-item">
                   <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('myaccount') }}">My Account</a>

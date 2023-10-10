@@ -82,6 +82,11 @@
        </li>
         {% endif %}
           {% if 'username' in session %}
+          {% if 'admin' in session and session['admin'] == 'yes' %}
+          <li class="nav-item">
+             <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('admin_panel') }}">Admin Panel</a>
+          </li>
+        {% endif %}
             <li class="nav-item">
                <a class="nav-link px-4 px-lg-2 py-3 active" aria-current="page" href="{{ url_for('myaccount') }}">My Account</a>
             </li>
@@ -95,6 +100,7 @@
     </div>
   </div>
   <body class="content">
+    {% if 'username' in session %}
     <div class="profile-container">
       <h1>Welcome {{ username }}!</h1>
       <form method="POST" action="{{ url_for('update_account') }}">
@@ -121,6 +127,7 @@
       </form>
       <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to Home</a>
   </div>
+    {% endif %}
     
     <div class="flash-messages-container">
         {% with messages = get_flashed_messages(with_categories=true) %}

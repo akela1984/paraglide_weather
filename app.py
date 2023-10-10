@@ -55,15 +55,16 @@ def login():
         # Check if the provided username exists in the database
         conn = sqlite3.connect('mydatabase.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT username, password FROM users WHERE username=?", (username,))
+        cursor.execute("SELECT username, password, admin FROM users WHERE username=?", (username,))
         user_data = cursor.fetchone()
         conn.close()
         
         if user_data is not None:
-            db_username, hashed_password = user_data
+            db_username, hashed_password, admin = user_data
             # Verify the hashed password against the provided password
             if bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8')):
                 session['username'] = username  # Set the username in the session
+                session['admin'] = admin  # Set the admin status in the session
 
                 # Flash a success message
                 flash('Login successful!', 'success')
@@ -73,6 +74,7 @@ def login():
         flash('Invalid credentials. Please try again', 'danger')
         
     return render_template('login.html')
+
 
 @app.route('/myaccount')
 def myaccount():
@@ -88,9 +90,9 @@ def myaccount():
             conn.close()
 
             if user_data:
-                # user_data contains (id, username, password, email, license_type)
-                user_id, username, _, email, license_type = user_data
-                return render_template('myaccount.html', username=username, email=email, license_type=license_type)
+                # user_data contains (id, username, password, email, license_type, admin)
+                user_id, username, _, email, license_type, admin = user_data
+                return render_template('myaccount.html', username=username, email=email, license_type=license_type, admin=admin)
             else:
                 flash('User not found in the database.', 'danger')
                 return redirect(url_for('index'))
@@ -119,6 +121,33 @@ def update_account():
             flash('Failed to update account information. Please try again.', 'danger')
     
     return redirect(url_for('myaccount'))
+
+@app.route('/admin_panel')
+def admin_panel():
+    if 'username' in session:
+        username = session['username']
+        try:
+            conn = sqlite3.connect('mydatabase.db')
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users")
+            users_data = cursor.fetchall()
+            conn.close()
+
+            if users_data:
+                # Assuming you want to display all users, you can pass the list of users
+                # to the template context.
+                return render_template('admin_panel.html', username=username, users=users_data)
+            else:
+                flash('No users found in the database.', 'danger')
+                return redirect(url_for('index'))
+        except sqlite3.Error as e:
+            flash('An error occurred while fetching user data.', 'danger')
+            return redirect(url_for('index'))
+    else:
+        flash('You must be logged in to access this page.', 'danger')
+        return redirect(url_for('login'))
+
+
 
 
 @app.route('/logout')
