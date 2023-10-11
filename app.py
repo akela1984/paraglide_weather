@@ -16,7 +16,6 @@ def get_news_from_database():
         conn.close()
         return news_data
     except sqlite3.Error as e:
-        # Handle database errors here
         return []
 
 @app.route('/')
@@ -34,7 +33,7 @@ def index():
         return render_template('index.html', latest_news=latest_news)
     except sqlite3.Error as e:
         flash('An error occurred while fetching news data.', 'danger')
-        return render_template('index.html', latest_news=[])  # Return an empty list if there's an error
+        return render_template('index.html', latest_news=[])
 
 
 @app.route('/links')
@@ -96,7 +95,7 @@ def login():
                 flash('Login successful!', 'success')
                 return redirect(url_for('index'))  # Redirect to the index page after successful login
         
-        # If the username or password is invalid, show an error message
+        # If the username or password is invalid, Flash an error message
         flash('Invalid credentials. Please try again', 'danger')
         
     return render_template('login.html')
@@ -248,7 +247,7 @@ def delete_user():
             except sqlite3.Error as e:
                 flash('Failed to delete user. Please try again.', 'danger')
         
-        return redirect(url_for('admin_panel'))  # Redirect to the admin_panel page after deletion
+        return redirect(url_for('admin_panel'))  
     else:
         flash('You must be logged in to access this page.', 'danger')
         return redirect(url_for('login'))
@@ -257,7 +256,6 @@ def delete_user():
 @app.route('/news/<string:title>')
 def news(title):
     try:
-        # Fetch the full news item from the database based on the title
         conn = sqlite3.connect('mydatabase.db')
         cursor = conn.cursor()
         cursor.execute("SELECT title, text, date FROM news WHERE title=?", (title,))
@@ -277,21 +275,18 @@ def news(title):
 
 @app.route('/logout')
 def logout():
-    session.pop('username', None)  # Remove the username from the session
-    # Flash a success message
+    session.pop('username', None) 
     flash('You have successfully logged out', 'success')
-    return redirect(url_for('index'))  # Redirect to the index page after logout
-
+    return redirect(url_for('index'))  
 
 @app.route('/sites')
 def sites():
-    # Fetch weather data from the API
     api_url = "https://api.openweathermap.org/data/2.5/forecast?lat=55.59194&lon=-3.66288&units=metric&appid=69129460125ea343f55bb51da80ec507"
     response = requests.get(api_url)
     if response.status_code == 200:
         data = response.json()
 
-        # Process the data and create the forecast
+
         forecast_data = data['list'][:4 * 8]
         forecast = []
 
@@ -446,7 +441,6 @@ def sites():
                     
                 })
 
-        # Render the HTML template with the forecast data
         return render_template('sites.html', forecast=forecast)
     else:
         return "Error fetching weather data"
