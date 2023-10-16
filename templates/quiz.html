@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Paragliding Sites - Login</title>
+    <title>Paragliding Sites - Quiz</title>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Q0L1YYED4"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -67,9 +67,9 @@
             <li class="nav-item">
               <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('links') }}">Links</a>
            </li>
-           <li class="nav-item">
-            <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('quiz') }}">Quiz</a>
-         </li>
+            <li class="nav-item">
+                <a class="nav-link px-4 px-lg-2 py-3 active" aria-current="page" href="{{ url_for('quiz') }}">Quiz</a>
+            </li>
            <li class="nav-item">
               <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('about') }}">About</a>
            </li>
@@ -78,7 +78,7 @@
          <ul class="navbar-nav ms-auto me-0 me-lg-3 border-top border-lg-0">
           {% if 'username' not in session %}
         <li class="nav-item">
-          <a class="nav-link px-4 px-lg-2 py-3 active" aria-current="page" href="{{ url_for('login') }}">Login</a>
+          <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('login') }}">Login</a>
        </li>
        <li class="nav-item">
           <a class="nav-link px-4 px-lg-2 py-3" href="{{ url_for('register') }}">Register</a>
@@ -98,20 +98,22 @@
     </div>
   </div>
   <body class="content">
-    <div class="login-container">
-        <form class="login-form" method="POST" action="{{ url_for('login') }}">
-            <h2>Login</h2>
-            <div class="form-group">
-                <label for="login-username">Username</label>
-                <input type="text" id="login-username" name="login-username" placeholder="Enter your username" required>
-            </div>
-            <div class="form-group">
-                <label for="login-password">Password</label>
-                <input type="password" id="login-password" name="login-password" placeholder="Enter your password" required>
-            </div>
-            <button type="submit">Login</button>
+    <div class="quiz-container">
+        <h1>Paragliding Quiz</h1>
+        <form method="post">
+            <p>{{ question.question }}</p>
+            <ul>
+                {% for answer in question.answers %}
+                <li>
+                    <label>
+                        <input type="radio" name="answer" value="{{ answer[0] }}">
+                        {{ answer }}
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
+            <input type="submit" id="next-button" value="Submit" class="btn btn-primary">
         </form>
-        <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
     </div>
     
     <div class="flash-messages-container">
@@ -126,5 +128,27 @@
         {% endwith %}
     </div>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    // Function to enable the "Next" button when an answer is selected
+    function enableNextButton() {
+        var answerSelected = document.querySelector('input[name="answer"]:checked');
+        var nextButton = document.getElementById('next-button');
+
+        if (answerSelected) {
+            nextButton.removeAttribute('disabled');
+        } else {
+            nextButton.setAttribute('disabled', 'disabled');
+        }
+    }
+
+    // Add an event listener to check for answer selection
+    var radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(function(radio) {
+        radio.addEventListener('change', enableNextButton);
+    });
+
+    // Initially check if there's an answer selected on page load
+    enableNextButton();
+</script>
   </body>
 </html>

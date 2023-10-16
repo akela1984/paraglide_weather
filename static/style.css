@@ -413,47 +413,47 @@ button {
 }
 
 /* CSS for the links-container class */
-.links-container, .about-container, .admin-panel-content {
+.links-container, .about-container, .admin-panel-content, .quiz-container {
   background-color: #f5f5f5; /* Background color */
   padding: 20px; /* Padding around the content */
   padding-top: 50px;
 }
 
 /* Style for headings */
-.links-container h3, .about-container h3, .admin-panel-content h3 {
+.links-container h3, .about-container h3, .admin-panel-content h3, .quiz-container h3 {
   color: #333; /* Heading text color */
   font-size: 1.5rem; /* Heading font size */
   margin-top: 10px; /* Spacing above headings */
 }
 
 /* Style for unordered lists */
-.links-container ul, .about-container ul, .admin-panel-content ul {
+.links-container ul, .about-container ul, .admin-panel-content ul, .quiz-container ul {
   list-style: none; /* Remove bullet points */
   padding: 0; /* Remove default list padding */
   margin: 0; /* Remove default list margin */
 }
 
 /* Style for list items */
-.links-container li, .about-container li, .admin-panel-content li {
+.links-container li, .about-container li, .admin-panel-content li, .quiz-container li {
   margin-bottom: 10px; /* Spacing between list items */
   font-size: 1rem; /* List item font size */
   line-height: 1.5; /* Line height for better readability */
 }
 
 /* Style for links */
-.links-container a, .about-container a, .admin-panel-content a {
+.links-container a, .about-container a, .admin-panel-content a, .quiz-container a{
   color: #007bff; /* Link text color */
   text-decoration: none; /* Remove underline */
   transition: color 0.3s; /* Smooth color transition on hover */
 }
 
 /* Hover effect for links */
-.links-container a:hover, .about-container a:hover, .admin-panel-content a:hover {
+.links-container a:hover, .about-container a:hover, .admin-panel-content a:hover, .quiz-container a:hover{
   color: #0056b3; /* Link text color on hover */
 }
 
 /* Style for external links (opens in a new tab) */
-.links-container a.external, .about-container a.external, .admin-panel-content a.external{
+.links-container a.external, .about-container a.external, .admin-panel-content a.external, .quiz-container a.external{ 
   background-image: url('external-link-icon.png'); /* Add an external link icon */
   background-repeat: no-repeat;
   background-position: right center;

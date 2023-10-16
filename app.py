@@ -3,6 +3,7 @@ from datetime import datetime
 import requests
 import sqlite3
 import bcrypt
+import random
 
 app = Flask(__name__)
 app.secret_key = '5d2a1f0f7bba42f6a5476c1e1a683376' 
@@ -17,6 +18,67 @@ def get_news_from_database():
         return news_data
     except sqlite3.Error as e:
         return []
+    
+questions = [
+    {
+        "question": "What is the primary source of lift that keeps a paraglider in the air?",
+        "answers": ["A) Jet engines", "B) Thermal currents", "C) Propellers", "D) Helium balloons"],
+        "correct_answer": "B",
+    },
+    {
+        "question": "What is the main piece of equipment used in paragliding to control direction and speed?",
+        "answers": ["A) Harness", "B) Helmet", "C) Parachute", "D) Wing"],
+        "correct_answer": "D",
+    },
+    {
+        "question": "What do you call the steering controls on a paraglider?",
+        "answers": ["A) Throttle", "B) Brakes", "C) Joystick", "D) Rudder"],
+        "correct_answer": "B",
+    },
+    {
+        "question": "In paragliding, what does the term 'wing loading' refer to?",
+        "answers": ["A) The weight of the pilot", "B) The wind speed", "C) The type of wing used", "D) The number of flights per day"],
+        "correct_answer": "A",
+    },
+    {
+        "question": "Which type of paragliding flight involves flying as high as possible and then gliding back to the ground without using a motor?",
+        "answers": ["A) Powered paragliding", "B) Tandem paragliding", "C) Acro paragliding", "D) Cross-country paragliding"],
+        "correct_answer": "D",
+    },
+    {
+        "question": "What is the name of the safety device used in paragliding that is designed to slow down or stop a rapid descent?",
+        "answers": ["A) Flare", "B) Flap", "C) Flip", "D) Float"],
+        "correct_answer": "A",
+    },
+    {
+        "question": "Paragliders often use a weather forecasting tool to find rising air currents. What is this tool called?",
+        "answers": ["A) Windsock", "B) Altimeter", "C) GPS", "D) Variometer"],
+        "correct_answer": "D",
+    },
+    {
+        "question": "What is the term for a sudden and dangerous loss of altitude in paragliding, often caused by turbulent air?",
+        "answers": ["A) Stall", "B) Glide", "C) Collapse", "D) Tumble"],
+        "correct_answer": "C",
+    },
+    {
+        "question": "Paragliders wear a safety device that automatically deploys in case of an emergency. What is it called?",
+        "answers": ["A) Reserve parachute", "B) Airbag", "C) Radio transmitter", "D) Windsock"],
+        "correct_answer": "A",
+    },
+    {
+        "question": "Which famous mountain range is a popular destination for paragliding in Europe?",
+        "answers": ["A) The Andes", "B) The Alps", "C) The Rocky Mountains", "D) The Himalayas"],
+        "correct_answer": "B",
+    },
+    # Add more questions here
+]
+
+# Shuffle the questions to make the quiz more random
+random.shuffle(questions)
+
+current_question = 0
+score = 0
+
 
 @app.route('/')
 def index():
@@ -51,6 +113,17 @@ def register():
         password = request.form['password']
         email = request.form['email']
         license_type = request.form['license_type']
+
+        # Check if the username or email is already registered
+        conn = sqlite3.connect('mydatabase.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = ? OR email = ?", (username, email))
+        existing_user = cursor.fetchone()
+        conn.close()
+
+        if existing_user:
+            flash('Username or email is already registered. Please choose a different one.', 'danger')
+            return redirect(url_for('register'))
 
         # Hash the password
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -271,7 +344,34 @@ def news(title):
     except sqlite3.Error as e:
         flash('An error occurred while fetching news data.', 'danger')
         return redirect(url_for('index'))
+    
+@app.route('/quiz', methods=['GET', 'POST'])
+def quiz():
+    global current_question, score
 
+    if request.method == 'POST':
+        user_answer = request.form.get('answer')
+
+        if user_answer == questions[current_question]["correct_answer"]:
+            score += 1
+
+        current_question += 1
+
+        if current_question < len(questions):
+            return render_template('quiz.html', question=questions[current_question])
+        else:
+            flash(f"Quiz completed! You scored {score} out of {len(questions)}", 'info')
+            current_question = 0
+            score = 0
+            return redirect(url_for('quiz'))
+
+    if current_question < len(questions):
+        return render_template('quiz.html', question=questions[current_question])
+    else:
+        flash(f"Quiz completed! You scored {score} out of {len(questions)}", 'info')
+        current_question = 0
+        score = 0
+        return render_template('quiz.html', question=None)
 
 @app.route('/logout')
 def logout():
