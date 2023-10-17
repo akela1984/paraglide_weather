@@ -1,12 +1,23 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from datetime import datetime
+from datetime import timedelta
+from functools import wraps
 import requests
 import sqlite3
 import bcrypt
 import random
 
 app = Flask(__name__)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
 app.secret_key = '5d2a1f0f7bba42f6a5476c1e1a683376' 
+
+def check_session_timeout():
+    if 'username' in session:
+        # If the user is logged in, touch the session to reset the timeout
+        session.permanent = True
+    else:
+        flash('Your session has expired. Please log in again.', 'warning')
+        return redirect(url_for('login'))
 
 def get_news_from_database():
     try:
@@ -79,6 +90,11 @@ random.shuffle(questions)
 current_question = 0
 score = 0
 
+@app.route('/some_route')
+def some_route():
+    # Touch the session to reset the inactivity timer
+    session.permanent = True
+    return 'This is a protected route'
 
 @app.route('/')
 def index():
@@ -666,3 +682,7 @@ def get_fly_condition_abington_and_dungeval(wind_direction, description, wind_sp
 
 if __name__ == '__main__':
     app.run()
+
+
+
+
