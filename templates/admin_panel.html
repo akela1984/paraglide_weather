@@ -149,7 +149,6 @@
                                 <td>{{ news_item[1] }}</td>
                                 <td>{{ news_item[2] }}</td>
                                 <td>
-                                 <button class="btn btn-primary edit-news-button" data-news-title="{{ news_item[1] }}" data-toggle="modal" data-target="#editNewsModal">Edit</button>
                                  <form method="post" action="{{ url_for('delete_news') }}">
                                      <input type="hidden" name="title" value="{{ news_item[1] }}">
                                      <input type="hidden" name="text" value="{{ news_item[2] }}">
