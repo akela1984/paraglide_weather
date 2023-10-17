@@ -279,6 +279,7 @@ def add_news():
     return redirect(url_for('admin_panel'))  # Redirect to the admin_panel page after adding news
 
 
+
 @app.route('/delete_news', methods=['POST'])
 def delete_news():
     if 'username' in session:
