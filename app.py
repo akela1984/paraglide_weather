@@ -278,6 +278,25 @@ def add_news():
 
     return redirect(url_for('admin_panel'))  # Redirect to the admin_panel page after adding news
 
+@app.route('/edit_news', methods=['POST'])
+def edit_news():
+    if 'username' in session:
+        title = request.form.get('editTitle')
+        text = request.form.get('editText')
+
+        try:
+            conn = sqlite3.connect('mydatabase.db')
+            cursor = conn.cursor()
+            cursor.execute("UPDATE news SET text=? WHERE title=?", (text, title))
+            conn.commit()
+            conn.close()
+            flash('News updated successfully', 'success')
+        except sqlite3.Error as e:
+            flash('Failed to update news. Please try again.', 'danger')
+
+    return redirect(url_for('admin_panel'))
+
+
 @app.route('/delete_news', methods=['POST'])
 def delete_news():
     if 'username' in session:
