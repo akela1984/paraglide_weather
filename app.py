@@ -23,7 +23,7 @@ def get_news_from_database():
     try:
         conn = sqlite3.connect('mydatabase.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT date, title, text FROM news")
+        cursor.execute("SELECT date, title, text FROM news ORDER BY date DESC")
         news_data = cursor.fetchall()
         conn.close()
         return news_data
