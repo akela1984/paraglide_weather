@@ -6,6 +6,7 @@ import requests
 import sqlite3
 import bcrypt
 import random
+import json
 
 app = Flask(__name__)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
@@ -30,59 +31,12 @@ def get_news_from_database():
     except sqlite3.Error as e:
         return []
     
-questions = [
-    {
-        "question": "What is the primary source of lift that keeps a paraglider in the air?",
-        "answers": ["A) Jet engines", "B) Thermal currents", "C) Propellers", "D) Helium balloons"],
-        "correct_answer": "B",
-    },
-    {
-        "question": "What is the main piece of equipment used in paragliding to control direction and speed?",
-        "answers": ["A) Harness", "B) Helmet", "C) Parachute", "D) Wing"],
-        "correct_answer": "D",
-    },
-    {
-        "question": "What do you call the steering controls on a paraglider?",
-        "answers": ["A) Throttle", "B) Brakes", "C) Joystick", "D) Rudder"],
-        "correct_answer": "B",
-    },
-    {
-        "question": "In paragliding, what does the term 'wing loading' refer to?",
-        "answers": ["A) The weight of the pilot", "B) The wind speed", "C) The type of wing used", "D) The number of flights per day"],
-        "correct_answer": "A",
-    },
-    {
-        "question": "Which type of paragliding flight involves flying as high as possible and then gliding back to the ground without using a motor?",
-        "answers": ["A) Powered paragliding", "B) Tandem paragliding", "C) Acro paragliding", "D) Cross-country paragliding"],
-        "correct_answer": "D",
-    },
-    {
-        "question": "What is the name of the safety device used in paragliding that is designed to slow down or stop a rapid descent?",
-        "answers": ["A) Flare", "B) Flap", "C) Flip", "D) Float"],
-        "correct_answer": "A",
-    },
-    {
-        "question": "Paragliders often use a weather forecasting tool to find rising air currents. What is this tool called?",
-        "answers": ["A) Windsock", "B) Altimeter", "C) GPS", "D) Variometer"],
-        "correct_answer": "D",
-    },
-    {
-        "question": "What is the term for a sudden and dangerous loss of altitude in paragliding, often caused by turbulent air?",
-        "answers": ["A) Stall", "B) Glide", "C) Collapse", "D) Tumble"],
-        "correct_answer": "C",
-    },
-    {
-        "question": "Paragliders wear a safety device that automatically deploys in case of an emergency. What is it called?",
-        "answers": ["A) Reserve parachute", "B) Airbag", "C) Radio transmitter", "D) Windsock"],
-        "correct_answer": "A",
-    },
-    {
-        "question": "Which famous mountain range is a popular destination for paragliding in Europe?",
-        "answers": ["A) The Andes", "B) The Alps", "C) The Rocky Mountains", "D) The Himalayas"],
-        "correct_answer": "B",
-    },
-    # Add more questions here
-]
+def load_questions():
+    with open('questions.json', 'r') as json_file:
+        questions = json.load(json_file)
+    return questions
+
+questions = load_questions() 
 
 # Shuffle the questions to make the quiz more random
 random.shuffle(questions)
@@ -373,31 +327,34 @@ def quiz():
         user_answer = request.form.get('answer')
 
         if user_answer == questions[current_question]["correct_answer"]:
-            global score
             score += 1
 
         current_question += 1
 
-        if current_question < len(questions):
+        if current_question < 10:  # Ask only 10 questions
             return render_template('quiz.html', question=questions[current_question])
         else:
-            flash(f"Quiz completed! You scored {score} out of {len(questions)}", 'info')
+            quiz_score = score  # Save the score
             current_question = 0
-            score = score
-            return redirect(url_for('quiz_result', score=score))
+            score = 0  # Reset the score
+            random.shuffle(questions)  # Shuffle questions for the next quiz
+            return redirect(url_for('quiz_result', score=quiz_score))
 
-    if current_question < len(questions):
+    if current_question < 10:  # Ask only 10 questions
         return render_template('quiz.html', question=questions[current_question])
     else:
-        flash(f"Your previously completed quiz had a score of {score} out of {len(questions)}.", 'info')
+        flash(f"Your previously completed quiz had a score of {score} out of 10.", 'info')
         current_question = 0
-        score = score
+        score = 0
+        random.shuffle(questions)  # Shuffle questions for the next quiz
         return render_template('quiz_result.html', score=score)
+
 
 @app.route('/quiz_result', methods=['GET'])
 def quiz_result():
     score = request.args.get('score')
     return render_template('quiz_result.html', score=score)
+
 
 
 @app.route('/logout')

@@ -1,0 +1,562 @@
+[
+    {
+        "question": "What is the primary source of lift that keeps a paraglider in the air?",
+        "answers": ["A) Jet engines", "B) Thermal currents", "C) Propellers", "D) Helium balloons"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is the main piece of equipment used in paragliding to control direction and speed?",
+        "answers": ["A) Harness", "B) Helmet", "C) Parachute", "D) Wing"],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What do you call the steering controls on a paraglider?",
+        "answers": ["A) Throttle", "B) Brakes", "C) Joystick", "D) Rudder"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "In paragliding, what does the term 'wing loading' refer to?",
+        "answers": ["A) The weight of the pilot", "B) The wind speed", "C) The type of wing used", "D) The number of flights per day"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "Which type of paragliding flight involves flying as high as possible and then gliding back to the ground without using a motor?",
+        "answers": ["A) Powered paragliding", "B) Tandem paragliding", "C) Acro paragliding", "D) Cross-country paragliding"],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the name of the safety device used in paragliding that is designed to slow down or stop a rapid descent?",
+        "answers": ["A) Flare", "B) Flap", "C) Flip", "D) Float"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "Paragliders often use a weather forecasting tool to find rising air currents. What is this tool called?",
+        "answers": ["A) Windsock", "B) Altimeter", "C) GPS", "D) Variometer"],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the term for a sudden and dangerous loss of altitude in paragliding, often caused by turbulent air?",
+        "answers": ["A) Stall", "B) Glide", "C) Collapse", "D) Tumble"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "Paragliders wear a safety device that automatically deploys in case of an emergency. What is it called?",
+        "answers": ["A) Reserve parachute", "B) Airbag", "C) Radio transmitter", "D) Windsock"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "Which famous mountain range is a popular destination for paragliding in Europe?",
+        "answers": ["A) The Andes", "B) The Alps", "C) The Rocky Mountains", "D) The Himalayas"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is the minimum age to fly paragliders in most countries?",
+        "answers": ["A) 16", "B) 18", "C) 21", "D) 25"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is the name of the organization that oversees paragliding safety and competition standards worldwide?",
+        "answers": ["A) The Fédération Aéronautique Internationale (FAI)", "B) The United States Parachute Association (USPA)", "C) The British Hang Gliding and Paragliding Association (BHPA)", "D) The Paragliding Association of Canada (PAC)"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "What is the term for a paragliding maneuver that involves flying upside down?",
+        "answers": ["A) Infinity loop", "B) Wingover", "C) Sat", "D) Spiral"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "Which type of paragliding flight involves flying low and close to the ground?",
+        "answers": ["A) Soaring", "B) Thermaling", "C) Acro", "D) Cross-country"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What is the name of the safety device used in paragliding to prevent the wing from collapsing?",
+        "answers": ["A) Trimmers", "B) Speedbar", "C) Leading edge reinforcements", "D) Damping rods"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What is the term for a paragliding maneuver that involves rotating the wing around the pilot's body?",
+        "answers": ["A) Spin", "B) Spiral", "C) Stall", "D) Wingover"],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the name of the type of paragliding competition where pilots race to a finish line?",
+        "answers": ["A) Accuracy landing", "B) Distance", "C) Thermal endurance", "D) Speed soaring"],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the term for a paragliding maneuver that involves flying through turbulent air?",
+        "answers": ["A) Active flying", "B) Passive flying", "C) Wind riding", "D) Collapsing"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "What is the name of the paragliding maneuver that involves flying backwards?",
+        "answers": ["A) Reverse landing", "B) Reverse launch", "C) Reverse takeoff", "D) Reverse turn"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is the term for the paragliding maneuver that involves flying in a tight circle to gain altitude?",
+        "answers": ["A) Thermaling", "B) Spiraling", "C) Soaring", "D) Acro"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is the primary purpose of a variometer in paragliding?",
+        "answers": ["A) To measure wind speed", "B) To navigate using GPS", "C) To detect thermals", "D) To control the wing"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What does the term 'wing loading' refer to in paragliding?",
+        "answers": ["A) The weight of the pilot", "B) The wing's airfoil shape", "C) The wind speed", "D) The number of lines on the wing"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "Which type of paraglider is generally used for acrobatics and stunts?",
+        "answers": ["A) Tandem wing", "B) Speed wing", "C) Acro wing", "D) Paraglider-X"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What is ridge soaring in paragliding?",
+        "answers": ["A) Soaring near a mountain ridge", "B) Flying with a tandem wing", "C) Flying during the night", "D) A type of wing design"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "In paragliding, what is 'XC' short for?",
+        "answers": ["A) X-country", "B) Extreme control", "C) Cross-cutting", "D) Xtreme climbing"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "What is the purpose of using a reserve parachute in paragliding?",
+        "answers": ["A) To increase speed", "B) To carry extra equipment", "C) For emergencies if the main wing fails", "D) To perform tricks"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What is the term 'thermalling' related to in paragliding?",
+        "answers": ["A) Flying at high altitudes", "B) Controlling wing flaps", "C) Climbing in rising air", "D) Flying without a harness"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "Which weather condition is generally considered unfavorable for paragliding?",
+        "answers": ["A) Stable air with little wind", "B) Strong, gusty winds", "C) Clear skies with mild temperatures", "D) Low humidity"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is a 'wind sock' used for in paragliding?",
+        "answers": ["A) To store equipment", "B) To indicate wind direction and speed", "C) To provide shade", "D) To measure altitude"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is a 'PFD' in the context of paragliding?",
+        "answers": ["A) Personal Flight Device", "B) Paragliding Flight Director", "C) Paragliding Friendly Dog", "D) Paraglider Folded Design"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "What weather phenomenon is responsible for creating thermals in paragliding?",
+        "answers": ["A) Fog", "B) Rainbows", "C) Sunlight heating the ground", "D) Snowfall"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "Which wind direction is typically ideal for ridge soaring in paragliding?",
+        "answers": ["A) North", "B) East", "C) West", "D) South"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "What does 'PMA' stand for in the context of paragliding safety?",
+        "answers": ["A) Paraglider Maneuvering Acrobatics", "B) Personal Mindset Adjustment", "C) Paragliding Maintenance Association", "D) Pre-flight Maneuver Analysis"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is the primary purpose of a chest strap in paragliding harnesses?",
+        "answers": ["A) To carry reserve parachutes", "B) To control wing flaps", "C) To enhance comfort", "D) To prevent slipping out of the harness"],
+        "correct_answer": "D"
+    },
+    {
+        "question": "In paragliding, what is a 'wingtip collapse'?",
+        "answers": ["A) A wing folding in half", "B) A wing spinning rapidly", "C) A part of the wing folding inwards", "D) A wing crashing into the ground"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What does 'PG' stand for in paragliding terminology?",
+        "answers": ["A) Paragliding", "B) Pilot Gear", "C) Paraglider Glide", "D) Peak Gust"],
+        "correct_answer": "A"
+    },
+    {
+        "question": "What is the significance of the paragliding 'launch site'?",
+        "answers": ["A) A place to store equipment", "B) A spot to rest during flights", "C) The location where flights begin", "D) A designated landing area"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What is 'dynamic soaring' in the context of paragliding?",
+        "answers": ["A) Soaring near dynamic landscapes", "B) Flying at high altitudes", "C) Soaring using air currents near cliffs", "D) Performing advanced tricks"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What is 'asymmetric collapse' in paragliding?",
+        "answers": ["A) A wing spinning rapidly", "B) A sudden loss of lift on one side of the wing", "C) A type of acrobatic maneuver", "D) A controlled descent technique"],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is a 'wind gradient' in paragliding meteorology?",
+        "answers": ["A) A sudden burst of wind", "B) A change in wind direction", "C) A change in wind speed with altitude", "D) A gust of wind"],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What does 'top landing' refer to in paragliding?",
+        "answers": ["A) Landing on the highest mountain", "B) Landing on the roof of a building", "C) Landing at the top of a thermal", "D) Landing on a predefined spot on a hill"],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is 'wingovers' in paragliding acrobatics?",
+        "answers": ["A) A type of wing design", "B) Performing somersaults in the air", "C) A maneuver to gain altitude", "D) A series of turns and loops"],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the primary source of lift that keeps a paraglider in the air?",
+        "answers": [
+            "A) Rising air currents",
+            "B) Engine thrust",
+            "C) Wind resistance",
+            "D) Solar panels"
+        ],
+        "correct_answer": "A"
+    },
+    {
+        "question": "What is the main piece of equipment used in paragliding to control direction and speed?",
+        "answers": [
+            "A) Helmet",
+            "B) Radio transmitter",
+            "C) Harness",
+            "D) Wing brakes"
+        ],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the name of the steering controls on a paraglider?",
+        "answers": [
+            "A) Rudder pedals",
+            "B) Ailerons",
+            "C) Brake toggles",
+            "D) Joysticks"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "In paragliding, what does the term 'wing loading' refer to?",
+        "answers": [
+            "A) Loading equipment onto the wing",
+            "B) Folding the wing for storage",
+            "C) The weight supported by the wing's surface",
+            "D) Attaching a secondary wing"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "Which type of paragliding flight involves flying as high as possible and then gliding back to the ground without using a motor?",
+        "answers": [
+            "A) Aerobatic flight",
+            "B) Cross-country flight",
+            "C) Soaring flight",
+            "D) Thermal flight"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What is the name of the safety device used in paragliding that is designed to slow down or stop a rapid descent?",
+        "answers": [
+            "A) Windsock",
+            "B) Reserve parachute",
+            "C) Altimeter",
+            "D) GPS tracker"
+        ],
+        "correct_answer": "B"
+    },
+    {
+        "question": "Paragliders often use a weather forecasting tool to find rising air currents. What is this tool called?",
+        "answers": [
+            "A) Thermometer",
+            "B) Anemometer",
+            "C) Barometer",
+            "D) Variometer"
+        ],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the term for a sudden and dangerous loss of altitude in paragliding, often caused by turbulent air?",
+        "answers": [
+            "A) Stall",
+            "B) Downburst",
+            "C) Glide",
+            "D) Updraft"
+        ],
+        "correct_answer": "B"
+    },
+    {
+        "question": "Paragliders wear a safety device that automatically deploys in case of an emergency. What is it called?",
+        "answers": [
+            "A) Windsock",
+            "B) Reserve parachute",
+            "C) Altimeter",
+            "D) GPS tracker"
+        ],
+        "correct_answer": "B"
+    },
+    {
+        "question": "Which famous mountain range is a popular destination for paragliding in Europe?",
+        "answers": [
+            "A) The Rockies",
+            "B) The Alps",
+            "C) The Andes",
+            "D) The Himalayas"
+        ],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What are the three main components of a paragliding system?",
+        "answers": [
+            "A) Wing, radio, and helmet",
+            "B) Harness, wing, and reserve parachute",
+            "C) GPS, altimeter, and boots",
+            "D) Sunglasses, windsock, and jacket"
+        ],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What is the difference between a paragliding harness and a reserve parachute harness?",
+        "answers": [
+            "A) They are the same thing",
+            "B) The reserve parachute harness is used for carrying equipment",
+            "C) The paragliding harness is used for steering, and the reserve parachute harness is for safety",
+            "D) The paragliding harness is worn on the back, and the reserve parachute harness is worn on the chest"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What are the different types of paragliding wings available?",
+        "answers": [
+            "A) Red, blue, and green",
+            "B) Tandem, solo, and racing",
+            "C) Single-skin, double-skin, and triple-skin",
+            "D) Mini-wing, speed wing, and acro wing"
+        ],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the difference between a single-skin and a double-skin paragliding wing?",
+        "answers": [
+            "A) The color",
+            "B) The number of lines",
+            "C) The number of cells in the wing",
+            "D) The presence of a reserve parachute"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What are the different types of paragliding risers available?",
+        "answers": [
+            "A) Brake toggles, A risers, B risers",
+            "B) Red, blue, and green risers",
+            "C) Trimmable, non-trimmable, and elastic risers",
+            "D) Tandem, solo, and racing risers"
+        ],
+        "correct_answer": "A"
+    },
+    {
+        "question": "What is the difference between a fixed and a trimmable riser?",
+        "answers": [
+            "A) The material they are made of",
+            "B) The length of the riser",
+            "C) The presence of speedbar attachments",
+            "D) The number of attachment points"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What is the purpose of a speedbar?",
+        "answers": [
+            "A) To measure wind speed",
+            "B) To provide shade",
+            "C) To control wing flaps",
+            "D) To increase airspeed"
+        ],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the purpose of a reserve parachute?",
+        "answers": [
+            "A) To store snacks for long flights",
+            "B) To provide shade on hot days",
+            "C) To control wing flaps",
+            "D) To be deployed in case of an emergency"
+        ],
+        "correct_answer": "D"
+    },
+    {
+        "question": "What is the recommended maintenance schedule for a paragliding wing and harness?",
+        "answers": [
+            "A) No maintenance is required",
+            "B) Check before every flight",
+            "C) Once a year",
+            "D) Every 10 years"
+        ],
+        "correct_answer": "B"
+    },
+    {
+        "question": "What are the signs that it may be time to replace your paragliding wing or harness?",
+        "answers": [
+            "A) It gets dirty",
+            "B) When you feel like a change",
+            "C) When it shows visible signs of wear and tear",
+            "D) Only when it gets a hole in it"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What are the different launch techniques used in paragliding?",
+        "answers": [
+            "A) Running takeoff, reverse launch, and cliff launch",
+            "B) Cartwheel launch, penguin slide, and bunny hop",
+            "C) Tumble launch, somersault launch, and moonwalk launch",
+            "D) Rocket launch, catapult launch, and teleportation launch"
+        ],
+        "correct_answer": "A"
+    },
+    {
+        "question": "What are the different landing techniques used in paragliding?",
+        "answers": [
+            "A) Skydiving landing, bungee jump landing, and water landing",
+            "B) Running landing, PLF (Parachute Landing Fall), and seated landing",
+            "C) Belly flop landing, somersault landing, and cartwheel landing",
+            "D) Hot air balloon landing, helicopter landing, and spaceship landing"
+        ],
+        "correct_answer": "B"
+    },
+    {
+        "question": "How do you control the direction and speed of a paraglider in flight?",
+        "answers": [
+            "A) Use the onboard computer",
+            "B) Yell loudly to scare away birds",
+            "C) Shift your weight and manipulate the brake toggles",
+            "D) Pray and hope for the best"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "How do you thermal in a paraglider?",
+        "answers": [
+            "A) By enjoying a hot meal mid-flight",
+            "B) By using a GPS navigation system",
+            "C) By catching rising air currents to gain altitude",
+            "D) By taking a nap in the air"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "How do you soar in paragliding?",
+        "answers": [
+            "A) By flapping your wings really hard",
+            "B) By shouting 'wheee' as loud as you can",
+            "C) By using ridge lift or thermals to stay aloft",
+            "D) By attaching a rocket booster to your harness"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What are the different types of paragliding maneuvers?",
+        "answers": [
+            "A) Loops, barrel rolls, and Immelmann turns",
+            "B) Hail Mary, the Funky Chicken, and the Moonwalk",
+            "C) Spirals, stalls, and wingovers",
+            "D) Twisting twirls, zig-zags, and cartwheels"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "How do you perform a wingover?",
+        "answers": [
+            "A) By asking the wing politely",
+            "B) By flapping your arms",
+            "C) By swinging the paraglider in a large pendulum motion",
+            "D) By playing the guitar while flying"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "How do you perform a spiral?",
+        "answers": [
+            "A) By singing a serenade to the clouds",
+            "B) By whistling a tune",
+            "C) By entering a steep banked turn that tightens into a spiral",
+            "D) By pretending to be a spinning top"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "How do you perform a reverse landing?",
+        "answers": [
+            "A) By walking backward",
+            "B) By folding the wing in reverse",
+            "C) By turning around and landing facing the other way",
+            "D) By screaming 'reverse' as loudly as possible"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What are some of the most common paragliding mistakes to avoid?",
+        "answers": [
+            "A) Landing too gently",
+            "B) Flying too high",
+            "C) Ignoring weather conditions and flying recklessly",
+            "D) Not wearing a helmet"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What are the most important safety considerations for paragliding pilots?",
+        "answers": [
+            "A) Safety is for amateurs",
+            "B) Always fly at night to avoid traffic",
+            "C) Check weather conditions, undergo proper training, and use safety equipment",
+            "D) Wear a cape for added style points"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What are the different types of weather conditions that can be dangerous for paragliding?",
+        "answers": [
+            "A) Sunny with a chance of rainbows",
+            "B) Clear skies with mild temperatures",
+            "C) Strong, gusty winds, thunderstorms, and turbulence",
+            "D) Fog and gentle breezes"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "How can you avoid paragliding accidents?",
+        "answers": [
+            "A) By wearing mismatched socks for good luck",
+            "B) By relying solely on luck",
+            "C) By following safe flying practices, maintaining equipment, and being cautious in the air",
+            "D) By never leaving the ground"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What should you do if you experience a paragliding emergency?",
+        "answers": [
+            "A) Call for a pizza delivery",
+            "B) Panic and scream for help",
+            "C) Deploy the reserve parachute, follow emergency procedures, and attempt to land safely",
+            "D) Try to hail a passing bird for a lift"
+        ],
+        "correct_answer": "C"
+    },
+    {
+        "question": "What are the benefits of joining a paragliding club or association?",
+        "answers": [
+            "A) Unlimited access to cotton candy",
+            "B) Meeting fellow paragliders and gaining access to valuable resources, training, and support",
+            "C) Participating in annual wing-folding championships",
+            "D) Learning the secret handshake of paragliding"
+        ],
+        "correct_answer": "B"
+    }
+]
