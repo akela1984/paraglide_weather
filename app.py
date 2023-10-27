@@ -321,7 +321,7 @@ score = 0
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
-    global current_question, score
+    global current_question, score, quiz_started
 
     if request.method == 'POST':
         user_answer = request.form.get('answer')
@@ -332,7 +332,7 @@ def quiz():
         current_question += 1
 
         if current_question < 10:  # Ask only 10 questions
-            return render_template('quiz.html', question=questions[current_question])
+            return render_template('quiz.html', question=questions[current_question], quiz_started=quiz_started, current_question=current_question)
         else:
             quiz_score = score  # Save the score
             current_question = 0
@@ -340,10 +340,14 @@ def quiz():
             random.shuffle(questions)  # Shuffle questions for the next quiz
             return redirect(url_for('quiz_result', score=quiz_score))
 
-    if current_question < 10:  # Ask only 10 questions
-        return render_template('quiz.html', question=questions[current_question])
+    if current_question == 0:  # Check if the quiz has started
+        quiz_started = False
     else:
-        flash(f"Your previously completed quiz had a score of {score} out of 10.", 'info')
+        quiz_started = True
+
+    if current_question < 10:  # Ask only 10 questions
+        return render_template('quiz.html', question=questions[current_question], quiz_started=quiz_started, current_question=current_question)
+    else:
         current_question = 0
         score = 0
         random.shuffle(questions)  # Shuffle questions for the next quiz
