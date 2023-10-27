@@ -363,6 +363,8 @@ def news(title):
         flash('An error occurred while fetching news data.', 'danger')
         return redirect(url_for('index'))
     
+score = 0
+
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
     global current_question, score
@@ -371,6 +373,7 @@ def quiz():
         user_answer = request.form.get('answer')
 
         if user_answer == questions[current_question]["correct_answer"]:
+            global score
             score += 1
 
         current_question += 1
@@ -380,16 +383,22 @@ def quiz():
         else:
             flash(f"Quiz completed! You scored {score} out of {len(questions)}", 'info')
             current_question = 0
-            score = 0
-            return redirect(url_for('quiz'))
+            score = score
+            return redirect(url_for('quiz_result', score=score))
 
     if current_question < len(questions):
         return render_template('quiz.html', question=questions[current_question])
     else:
-        flash(f"Quiz completed! You scored {score} out of {len(questions)}", 'info')
+        flash(f"Your previously completed quiz had a score of {score} out of {len(questions)}.", 'info')
         current_question = 0
-        score = 0
-        return render_template('quiz.html', question=None)
+        score = score
+        return render_template('quiz_result.html', score=score)
+
+@app.route('/quiz_result', methods=['GET'])
+def quiz_result():
+    score = request.args.get('score')
+    return render_template('quiz_result.html', score=score)
+
 
 @app.route('/logout')
 def logout():

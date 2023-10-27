@@ -366,13 +366,14 @@ button {
 /* Style the flash-messages-container to stick to the bottom */
 .flash-messages-container {
   position: fixed;
-  bottom: 0;
+  bottom: 20px; /* Increase the bottom padding to create space above the buttons */
   left: 0;
   width: 100%;
-  padding: 10px; /* Adjust padding as needed */
-  background-color: transparent; /* Background color for the container */
-  z-index: 9999; /* Ensure it's above other content */
+  padding: 10px;
+  background-color: transparent;
+  z-index: 9999;
 }
+
 
 /* Style the individual flashed messages */
 .flash-messages-container .alert {
@@ -465,5 +466,19 @@ button {
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+/* Center the quiz container in the middle of the screen and use a fixed-size box */
+.quiz-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px; /* Set a fixed width */
+  background-color: #ffffff; /* Background color of the box */
+  padding: 20px; /* Padding around the content inside the box */
+  border: 1px solid #cccccc; /* Border for the box */
+  border-radius: 8px; /* Rounded corners for the box */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle depth effect */
 }
 
