@@ -536,7 +536,11 @@ def sites():
 # Helper function to get wind direction
 def get_wind_direction(degree):
     directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
-    return directions[round((degree % 360) / 22.5)]
+    try:
+        return directions[round((degree % 360) / 22.5)]
+    except IndexError:
+        # Handle the case where the degree value doesn't correspond to a recognized direction
+        return "Unknown"
 
 # Helper function to determine fly condition for Tinto South
 def get_fly_condition_tinto_south(wind_direction, description, wind_speed):
