@@ -321,6 +321,8 @@ score = 0
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
+    session['current_question'] = 0
+    session['score'] = 0
     global current_question, score
 
     if request.method == 'POST':
