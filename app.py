@@ -349,12 +349,28 @@ def quiz():
         session['score'] = 0
         random.shuffle(questions)  # Shuffle questions for the next quiz
         return render_template('quiz_result.html', score=session['score'])
+    
 
+@app.route('/quiz_result/<int:score>')
+def quiz_result(score):
+    # Define score ranges and messages
+    score_ranges = {
+    (1, 2): "You're off to a great start! But, You have a lot more to learn to flyi high!",
+    (3, 4): "Nice job! You're getting the hang of it. But there's still a lot to learn. Do't give up and keep soaring!",
+    (5, 6): "Impressive! You're on your way to becoming a paragliding pro!",
+    (7, 8): "Wow, you're almost there! It seems like paragliding is in your veins, but remember, never stop learning!",
+    (9, 10): "Perfect score! You're ready to conquer the skies! Go paragliding now!",
+}
 
-@app.route('/quiz_result', methods=['GET'])
-def quiz_result():
-    score = request.args.get('score')
-    return render_template('quiz_result.html', score=score)
+    # Find the appropriate message for the score range
+    result_message = "Keep practicing and improving your knowledge"  # Default message
+
+    for score_range, encouragement in score_ranges.items():
+        if score_range[0] <= score <= score_range[1]:
+            result_message = encouragement
+            break
+
+    return render_template('quiz_result.html', score=score, result_message=result_message)
 
 
 

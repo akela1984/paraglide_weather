@@ -112,6 +112,7 @@
     <div class="quiz-container">
         <h3>Quiz Result</h3>
         <p>You scored {{ score }} out of 10 questions.</p>
+        <p><strong>{{ result_message }}</strong></p>
         <button onclick="window.location.href='{{ url_for('quiz') }}'" class="btn btn-primary">Take a New Quiz</button>
         <button onclick="window.location.href='{{ url_for('index') }}'" class="btn btn-primary">Back to Home</button>
     </div>
