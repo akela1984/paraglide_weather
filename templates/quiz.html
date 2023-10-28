@@ -110,24 +110,24 @@
   </div>
   <body class="content">
     <div class="quiz-container">
-      
-        <h1>Paragliding Quiz</h1>
-        <p>Question {{ current_question + 1 }}</p>
-        <form method="post">
-            <p>{{ question.question }}</p>
-            <ul>
-                {% for answer in question.answers %}
-                <li>
-                    <label>
-                        <input type="radio" name="answer" value="{{ answer[0] }}">
-                        {{ answer }}
-                    </label>
-                </li>
-                {% endfor %}
-            </ul>
-            <input type="submit" id="next-button" value="Submit" class="btn btn-primary">
-        </form>
-    </div>
+      <h1>Paragliding Quiz</h1>
+      <p>Question {{ current_question + 1 }}</p> <!-- Display the current question number -->
+  
+      <form method="post">
+          <p>{{ question.question }}</p>
+          <ul>
+              {% for answer in question.answers %}
+              <li>
+                  <label>
+                      <input type="radio" name="answer" value="{{ answer[0] }}">
+                      {{ answer }}
+                  </label>
+              </li>
+              {% endfor %}
+          </ul>
+          <input type="submit" id="next-button" value="Submit" class="btn btn-primary">
+      </form>
+  </div>
     
     <div class="flash-messages-container">
         {% with messages = get_flashed_messages(with_categories=true) %}

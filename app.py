@@ -321,34 +321,34 @@ score = 0
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
-    session['current_question'] = 0
-    session['score'] = 0
-    global current_question, score
+    if 'current_question' not in session:
+        session['current_question'] = 0
+        session['score'] = 0
 
     if request.method == 'POST':
         user_answer = request.form.get('answer')
 
-        if user_answer == questions[current_question]["correct_answer"]:
-            score += 1
+        if user_answer == questions[session['current_question']]["correct_answer"]:
+            session['score'] += 1
 
-        current_question += 1
+        session['current_question'] += 1
 
-        if current_question < 10:  # Ask only 10 questions
-            return render_template('quiz.html', question=questions[current_question], current_question=current_question)
+        if session['current_question'] < 10:  # Ask only 10 questions
+            return render_template('quiz.html', question=questions[session['current_question']], current_question=session['current_question'])
         else:
-            quiz_score = score  # Save the score
-            current_question = 0
-            score = 0  # Reset the score
+            quiz_score = session['score']  # Save the score
+            session['current_question'] = 0
+            session['score'] = 0  # Reset the score
             random.shuffle(questions)  # Shuffle questions for the next quiz
             return redirect(url_for('quiz_result', score=quiz_score))
 
-    if current_question < 10:  # Ask only 10 questions
-        return render_template('quiz.html', question=questions[current_question], current_question=current_question)
+    if session['current_question'] < 10:  # Ask only 10 questions
+        return render_template('quiz.html', question=questions[session['current_question']], current_question=session['current_question'])
     else:
-        current_question = 0
-        score = 0
+        session['current_question'] = 0
+        session['score'] = 0
         random.shuffle(questions)  # Shuffle questions for the next quiz
-        return render_template('quiz_result.html', score=score)
+        return render_template('quiz_result.html', score=session['score'])
 
 
 @app.route('/quiz_result', methods=['GET'])
