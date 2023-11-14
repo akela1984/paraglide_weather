@@ -490,11 +490,6 @@ button {
   transform: rotate(45deg);
   z-index: 9999;
 }
-.more-info {
-  text-align: center;
-  transform: rotate(-45deg);
-  margin-top: 10px; /* Adjust the spacing between the lines */
-}
 
 .ribbon span {
   display: block;
