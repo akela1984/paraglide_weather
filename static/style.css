@@ -482,3 +482,27 @@ button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle depth effect */
 }
 
+
+.ribbon {
+  position: fixed;
+  bottom: 60px; /* adjust for positioning */
+  right: -60px; /* adjust for positioning */
+  transform: rotate(45deg);
+  z-index: 9999;
+}
+.more-info {
+  text-align: center;
+  transform: rotate(-45deg);
+  margin-top: 10px; /* Adjust the spacing between the lines */
+}
+
+.ribbon span {
+  display: block;
+  width: 300px;
+  padding: 10px;
+  background: red;
+  color: white;
+  text-align: center;
+  transform: rotate(270deg); /* counteract the parent rotation */
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
