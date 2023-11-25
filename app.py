@@ -24,7 +24,7 @@ def get_news_from_database():
     try:
         conn = sqlite3.connect('mydatabase.db')
         cursor = conn.cursor()
-        cursor.execute("SELECT date, title, text FROM news ORDER BY date DESC")
+        cursor.execute("SELECT id, date, title, text FROM news ORDER BY date DESC")
         news_data = cursor.fetchall()
         conn.close()
         return news_data
@@ -57,7 +57,7 @@ def index():
         cursor = conn.cursor()
 
         # Fetch the latest 10 news items from the database
-        cursor.execute("SELECT date, title, text FROM news ORDER BY date DESC LIMIT 10")
+        cursor.execute("SELECT id, date, title, text FROM news ORDER BY date DESC LIMIT 10")
         latest_news = cursor.fetchall()
 
         conn.close()
@@ -258,12 +258,10 @@ def delete_news():
             cursor = conn.cursor()
 
             # Get the criteria for deleting news items
-            date = request.form.get('date')
-            title = request.form.get('title')
-            text = request.form.get('text')
+            id = request.form.get('id')
 
             # Delete news items based on the provided criteria
-            cursor.execute("DELETE FROM news WHERE date=? AND title=? AND text=?", (date, title, text))
+            cursor.execute("DELETE FROM news WHERE id=?", (id,))
             conn.commit()
             conn.close()
             flash('News deleted successfully', 'success')

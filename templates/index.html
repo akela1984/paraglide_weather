@@ -116,22 +116,23 @@
       </header>
       <section class="py-5 bg-light">
          <div class="container">
-            <h2 class="display-4 text-center">Latest News</h2>
-            <div class="row justify-content-around mt-5 mb-3">
-               {% for news_item in latest_news %}
-               <div class="col-md-5">
-                  <a href="{{ url_for('news', title=news_item[1], text=news_item[2][:200]) }}" class="text-decoration-none">
-                     <blockquote class="blockquote p-3 font-italic bg-white">
-                        <p>{{ news_item[1] }}</p>
-                        <footer class="blockquote-footer">{{ news_item[2][:200] }} ...</footer>
-                        <p class="small">Date: {{ news_item[0].split(' ')[0] }}</p>
-                     </blockquote>
-                  </a>
-               </div>
-               {% endfor %}
-            </div>
+             <h2 class="display-4 text-center">Latest News</h2>
+             <div class="row justify-content-around mt-5 mb-3">
+                 {% for news_item in latest_news %}
+                 <div class="col-md-5">
+                     <a href="{{ url_for('news', title=news_item[1], text=news_item[2][:200]) }}" class="text-decoration-none">
+                         <input type="hidden" name="id" value="{{ news_item[0] }}">
+                         
+                         <blockquote class="blockquote p-3 font-italic bg-white">
+                             <p>{{ news_item[2] }}</p>
+                             <footer class="blockquote-footer">{{ news_item[3][:200] }} ...</footer>
+                             <p class="small">Date: {{ news_item[1].split(' ')[0] }}</p>
+                     </a>
+                 </div>
+                 {% endfor %}
+             </div>
          </div>
-      </section>
+     </section>
       <div class="flash-messages-container">
          {% with messages = get_flashed_messages(with_categories=true) %}
          {% if messages %}
