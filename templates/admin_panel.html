@@ -213,6 +213,8 @@
                               <th>ID</th>
                               <th>Username</th>
                               <th>Email</th>
+                              <th>License Type</th>
+                              <th>Admin Privilege</th>
                               <th>Action</th>
                            </tr>
                         </thead>
@@ -222,6 +224,8 @@
                                <td>{{ user[0] }}</td>
                                <td>{{ user[1] }}</td>
                                <td>{{ user[3] }}</td>
+                               <td>{{ user[4] }}</td>
+                               <td>{{ user[5] }}</td>
                                <td>
                                    <form id="delete-user-form-{{ user[0] }}" method="post" action="/delete_user">
                                        <input type="hidden" name="user_id" value="{{ user[0] }}">
