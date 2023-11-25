@@ -29,9 +29,9 @@ Learn Python Fundamentals: Gain a solid understanding of Python and its applicat
 Adopt Industry Coding Standards: Develop good coding habits by paying attention to proper indentation and commenting throughout the code.
 
 Project Links
-GitHub Repository: Paraglide Weather GitHub
+GitHub Repository: [Paraglide Weather GitHub](https://github.com/akela1984/paraglide_weather )
 
-Deployment: Paraglide Weather App
+Deployment: https://llsc-3d120d02af88.herokuapp.com/ ![image](https://github.com/akela1984/paraglide_weather/assets/65036096/8cdbd265-2bca-48ac-81aa-c2b2a72664bd)
 
 Admin Access
 To explore the administrative features, log in with the following credentials:
