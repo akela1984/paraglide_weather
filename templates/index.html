@@ -120,7 +120,7 @@
              <div class="row justify-content-around mt-5 mb-3">
                  {% for news_item in latest_news %}
                  <div class="col-md-5">
-                     <a href="{{ url_for('news', title=news_item[1], text=news_item[2][:200]) }}" class="text-decoration-none">
+                     <a href="{{ url_for('news', title=news_item[2], text=news_item[3][:200]) }}" class="text-decoration-none">
                          <input type="hidden" name="id" value="{{ news_item[0] }}">
                          
                          <blockquote class="blockquote p-3 font-italic bg-white">

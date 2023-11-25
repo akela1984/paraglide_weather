@@ -353,11 +353,10 @@ def delete_user():
 @app.route('/news/<string:title>')
 def news(title):
     try:
-        conn = sqlite3.connect('mydatabase.db')
-        cursor = conn.cursor()
-        cursor.execute("SELECT title, text, date FROM news WHERE title=?", (title,))
-        news_data = cursor.fetchone()
-        conn.close()
+        with sqlite3.connect('mydatabase.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT title, text, date FROM news WHERE title=?", (title,))
+            news_data = cursor.fetchone()
 
         if news_data:
             news_title, news_text, news_date = news_data
@@ -366,8 +365,13 @@ def news(title):
             flash('News not found in the database.', 'danger')
             return redirect(url_for('index'))
     except sqlite3.Error as e:
+        app.logger.error(f"An error occurred: {e}")
         flash('An error occurred while fetching news data.', 'danger')
         return redirect(url_for('index'))
+    except Exception as e:
+        app.logger.error(f"An unexpected error occurred: {e}")
+        abort(500)
+
     
 score = 0
 
