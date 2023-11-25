@@ -132,6 +132,13 @@
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
          </form>
+         <br>
+         {% if admin == "no" %}
+         <form id="delete-account-form" method="post" action="{{ url_for('delete_account') }}">
+            <input type="hidden" name="user_to_delete" value="{{ id }}">
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete Account</button>
+        </form>
+          {% endif %}
          <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to Home</a>
       </div>
       {% endif %}
@@ -150,5 +157,28 @@
          <span>University Project</span>
       </div>
       <script src="{{ url_for('static', filename='script.js') }}"></script>
+      <script>
+         function confirmDelete() {
+             bootbox.confirm({
+                 message: "Are you sure you want to delete your account?",
+                 buttons: {
+                     confirm: {
+                         label: 'Yes',
+                         className: 'btn-danger'
+                     },
+                     cancel: {
+                         label: 'No',
+                         className: 'btn-secondary'
+                     }
+                 },
+                 callback: function (result) {
+                     if (result) {
+                         document.getElementById('delete-account-form').submit();
+                     }
+                 }
+             });
+         }
+     </script>
+     
    </body>
 </html>

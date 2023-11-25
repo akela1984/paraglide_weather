@@ -46,7 +46,6 @@ score = 0
 
 @app.route('/some_route')
 def some_route():
-    # Touch the session to reset the inactivity timer
     session.permanent = True
     return 'This is a protected route'
 
@@ -56,8 +55,8 @@ def index():
         conn = sqlite3.connect('mydatabase.db')
         cursor = conn.cursor()
 
-        # Fetch the latest 10 news items from the database
-        cursor.execute("SELECT id, date, title, text FROM news ORDER BY date DESC LIMIT 10")
+        # Fetch the latest 8 news items from the database
+        cursor.execute("SELECT id, date, title, text FROM news ORDER BY date DESC LIMIT 8")
         latest_news = cursor.fetchall()
 
         conn.close()
@@ -158,7 +157,6 @@ def myaccount():
             conn.close()
 
             if user_data:
-                # user_data contains (id, username, password, email, license_type, admin)
                 user_id, username, _, email, license_type, admin = user_data
                 return render_template('myaccount.html', username=username, email=email, license_type=license_type, admin=admin)
             else:
@@ -170,6 +168,7 @@ def myaccount():
     else:
         flash('You must be logged in to access this page.', 'danger')
         return redirect(url_for('login'))
+    
 @app.route('/update_account', methods=['POST'])
 def update_account():
     if 'username' in session:
@@ -190,6 +189,26 @@ def update_account():
     
     return redirect(url_for('myaccount'))
 
+@app.route('/delete_account', methods=['POST'])
+def delete_account():
+    if 'username' in session:
+        if request.method == 'POST':
+            user_to_delete = session['username']  
+
+            try:
+                conn = sqlite3.connect('mydatabase.db')
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM users WHERE username=?", (user_to_delete,))
+                conn.commit()
+                conn.close()
+                flash('Account deleted successfully', 'success')
+            except sqlite3.Error as e:
+                flash('Failed to delete account. Please try again.', 'danger')
+
+            session.pop('username', None)
+
+    return redirect(url_for('index'))
+
 @app.route('/admin_panel')
 def admin_panel():
     if 'username' in session:
@@ -206,8 +225,6 @@ def admin_panel():
             conn.close()
 
             if users_data:
-                # Assuming you want to display all users, you can pass the list of users
-                # to the template context.
                 return render_template('admin_panel.html', username=username, users=users_data, news=news_data)
             else:
                 flash('No users found in the database.', 'danger')
@@ -246,9 +263,7 @@ def add_news():
         except sqlite3.Error as e:
             flash('Failed to add news. Please try again.', 'danger')
 
-    return redirect(url_for('admin_panel'))  # Redirect to the admin_panel page after adding news
-
-
+    return redirect(url_for('admin_panel'))
 
 @app.route('/delete_news', methods=['POST'])
 def delete_news():
@@ -273,7 +288,46 @@ def delete_news():
         flash('You must be logged in to delete news.', 'danger')
         return redirect(url_for('login'))
 
+@app.route('/add_user', methods=['POST'])
+def add_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+        email = request.form['email']
+        license_type = request.form['license_type']
 
+        # Check if the password and confirm_password match
+        if password != confirm_password:
+            flash('Passwords do not match. Please try again.', 'danger')
+            return redirect(url_for('admin_panel'))
+
+        # Check if the username or email is already registered
+        with sqlite3.connect('mydatabase.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users WHERE username = ? OR email = ?", (username, email))
+            existing_user = cursor.fetchone()
+
+        if existing_user:
+            flash('Username or email is already registered. Please choose a different one.', 'danger')
+            return redirect(url_for('admin_panel'))
+
+        # Hash the password
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+        # Insert user data into the database
+        try:
+            with sqlite3.connect('mydatabase.db') as conn:
+                cursor = conn.cursor()
+                cursor.execute("INSERT INTO users (username, password, email, license_type) VALUES (?, ?, ?, ?)",
+                               (username, hashed_password.decode('utf-8'), email, license_type))
+                conn.commit()
+            flash('User added successfully', 'success')
+            return redirect(url_for('admin_panel'))
+        except sqlite3.Error as e:
+            flash(f'User addition failed. Error: {str(e)}', 'danger')
+            return redirect(url_for('admin_panel'))
+        
 @app.route('/delete_user', methods=['POST'])
 def delete_user():
     if 'username' in session:

@@ -139,7 +139,7 @@
                            <label for="text">Text:</label> 
                            <textarea class="form-control" id="text" name="text" placeholder="Enter news text" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Add News</button>
                      </form>
                   </div>
                   <div class="container mt-5">
@@ -160,10 +160,10 @@
                                 <td>{{ news_item[2] }}</td>
                                 <td>{{ news_item[3] }}</td>
                                 <td>
-                                 <form method="post" action="/delete_news">
+                                 <form id="delete-news-form-{{ news_item[0] }}" method="post" action="/delete_news">
                                     <input type="hidden" name="id" value="{{ news_item[0] }}">
-                                    <button class="btn btn-danger" type="submit">Delete News</button>
-                                </form>
+                                    <button class="btn btn-danger" type="button" onclick="confirmDeleteNews('{{ news_item[0] }}')">Delete News</button>
+                                 </form>                                
                              </td>
                             </tr>
                             {% endfor %}
@@ -173,6 +173,39 @@
                </div>
                <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
                   <div class="container mt-5">
+                     <div class="container mt-5">
+                        <h3>Add New User</h3>
+                        <form method="POST" action="{{ url_for('add_user') }}" class="row g-3">
+                            <div class="col-md-4">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="confirm_password" class="form-label">Repeat Password</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Repeat password" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="license_type" class="form-label">License Type</label>
+                                <select class="form-control" id="license_type" name="license_type" required>
+                                    <option value="EP - Elementary Pilot">EP - Elementary Pilot</option>
+                                    <option value="CP - Club Pilot">CP - Club Pilot</option>
+                                    <option value="Pilot">Pilot</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <button type="submit" class="btn btn-primary">Add User</button>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
                      <h3>Registered Users</h3>
                      <table class="table table-bordered">
                         <thead>
@@ -186,17 +219,22 @@
                         <tbody>
                            {% for user in users %}
                            <tr>
-                              <td>{{ user[0] }}</td>
-                              <td>{{ user[1] }}</td>
-                              <td>{{ user[3] }}</td>
-                              <td>
-                                 <form method="post" action="/delete_user">
-                                    <input type="hidden" name="user_id" value="{{ user[0] }}">
-                                    <button class="btn btn-danger" type="submit">Delete User</button>
-                                </form>
-                              </td>
+                               <td>{{ user[0] }}</td>
+                               <td>{{ user[1] }}</td>
+                               <td>{{ user[3] }}</td>
+                               <td>
+                                   <form id="delete-user-form-{{ user[0] }}" method="post" action="/delete_user">
+                                       <input type="hidden" name="user_id" value="{{ user[0] }}">
+                                       <input type="hidden" name="delete_permission" value="{{ user[5] }}">
+                                       {% if user[5] == "no" %}
+                                           <button class="btn btn-danger" type="button" onclick="confirmDeleteUser('{{ user[0] }}')">Delete User</button>
+                                       {% elif user[5] == "yes" %}
+                                           <button class="btn btn-warning" type="button" disabled>Protected user</button>
+                                       {% endif %}
+                                   </form>
+                               </td>
                            </tr>
-                           {% endfor %}
+                       {% endfor %}                       
                         </tbody>
                      </table>
                   </div>
@@ -222,6 +260,50 @@
          {% endwith %}
       </div>
       <script src="{{ url_for('static', filename='script.js') }}"></script>
-   
+      <script>
+         function confirmDeleteNews(newsId) {
+             bootbox.confirm({
+                 message: "Are you sure you want to delete this news?",
+                 buttons: {
+                     confirm: {
+                         label: 'Yes',
+                         className: 'btn-danger'
+                     },
+                     cancel: {
+                         label: 'No',
+                         className: 'btn-secondary'
+                     }
+                 },
+                 callback: function (result) {
+                     if (result) {
+                         document.getElementById('delete-news-form-' + newsId).submit();
+                     }
+                 },
+                 onEscape: true
+             });
+         }
+ 
+         function confirmDeleteUser(userId) {
+             bootbox.confirm({
+                 message: "Are you sure you want to delete this user?",
+                 buttons: {
+                     confirm: {
+                         label: 'Yes',
+                         className: 'btn-danger'
+                     },
+                     cancel: {
+                         label: 'No',
+                         className: 'btn-secondary'
+                     }
+                 },
+                 callback: function (result) {
+                     if (result) {
+                         document.getElementById('delete-user-form-' + userId).submit();
+                     }
+                 },
+                 onEscape: true
+             });
+         }
+     </script>
    </body>
 </html>
